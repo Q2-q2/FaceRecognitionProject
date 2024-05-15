@@ -38,6 +38,9 @@ namespace MultiFaceRec
         public FrmPrincipal()
         {
             InitializeComponent();
+
+            CheckForIllegalCrossThreadCalls = false;
+
             //Load haarcascades for face detection
             face = new HaarCascade("haarcascade_frontalface_default.xml");
             //eye = new HaarCascade("haarcascade_eye.xml");
@@ -66,6 +69,20 @@ namespace MultiFaceRec
 
         }
 
+        private void bunifuPanel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuFormControlBox1_HelpClicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
