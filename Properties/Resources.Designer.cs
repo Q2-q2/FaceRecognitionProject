@@ -59,5 +59,36 @@ namespace MultiFaceRec.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_transparent_facial_recognition_system_computer_icons_reconnaissance_text_emoticon_black_and_white {
+            get {
+                object obj = ResourceManager.GetObject("png-transparent-facial-recognition-system-computer-icons-reconnaissance-text-emot" +
+                        "icon-black-and-white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_transparent_menu_feather_icon {
+            get {
+                object obj = ResourceManager.GetObject("png-transparent-menu-feather-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap windows_settings_app_icon_292036 {
+            get {
+                object obj = ResourceManager.GetObject("windows-settings-app-icon-292036", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

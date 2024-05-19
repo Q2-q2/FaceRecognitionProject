@@ -179,6 +179,15 @@
   <ItemGroup>
     <None Include="Resources\Donate.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\png-transparent-facial-recognition-system-computer-icons-reconnaissance-text-emoticon-black-and-white1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\png-transparent-menu-feather-icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\windows-settings-app-icon-2920361.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
