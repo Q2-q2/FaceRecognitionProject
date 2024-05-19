@@ -117,64 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="bunifuLabel1.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Segoe UI'; font-size: 9pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="comboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 76</value>
+  <data name="bunifuLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
   </data>
-  <data name="comboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 24</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="comboBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;comboBox1.Name" xml:space="preserve">
-    <value>comboBox1</value>
-  </data>
-  <data name="&gt;&gt;comboBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;comboBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="bunifuToggleSwitch1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADwAAAAVCAYAAAAaX42MAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAE7SURBVFhH7ZexSgNBEIa3TGlpkc1a+gg+gi8h2AiWlrHz
-        AYTdPUJasba2tbTNGwgWQVAThRgVQmb853KXEJkX2CE/fNXsHvczs3f7u/8KN9zxkU97iYZg1EvMZYF3
-        znTrE52HyHuNLV0h05GP9Axm+sNKguYw/drNdNzY2xZMXvpMH/rmcqk9RUqNzZXqzho024JOTzHmJyuz
-        cmYTvWgLbUHvYcD7MsoX4FdfZA0aupDoTi9ahEbS4Se9aBH6dnrBLjvD1tkZto7DpeNNK1gEXhcO98wH
-        rWgR+QWjw9wX59oCcyA2OmTGAxg2GxxaJBxJSKoDBMb6DJ3+1BZaAKM8A9e12VZyln1afmkbSqYblz+4
-        Uj5KKmysbuQzX6E40TaWiIyxr6hSzbYKFR9Kgio7VNAYH6j79Zldy7k/uICrBZ4uPKMAAAAASUVORK5C
-        YII=
-</value>
-  </data>
-  <data name="bunifuToggleSwitch1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 79</value>
+  <data name="bunifuLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 118</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="bunifuToggleSwitch1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="bunifuLabel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
-  <data name="bunifuToggleSwitch1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 21</value>
+  <data name="bunifuLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 20</value>
   </data>
-  <data name="bunifuToggleSwitch1.TabIndex" type="System.Int32, mscorlib">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bunifuLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;bunifuToggleSwitch1.Name" xml:space="preserve">
-    <value>bunifuToggleSwitch1</value>
+  <data name="bunifuLabel1.Text" xml:space="preserve">
+    <value>bunifuLabel1</value>
   </data>
-  <data name="&gt;&gt;bunifuToggleSwitch1.Type" xml:space="preserve">
-    <value>Bunifu.UI.WinForms.BunifuToggleSwitch, Bunifu.UI.WinForms, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9</value>
+  <data name="&gt;&gt;bunifuLabel1.Name" xml:space="preserve">
+    <value>bunifuLabel1</value>
   </data>
-  <data name="&gt;&gt;bunifuToggleSwitch1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;bunifuLabel1.Type" xml:space="preserve">
+    <value>Bunifu.UI.WinForms.BunifuLabel, Bunifu.UI.WinForms, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9</value>
+  </data>
+  <data name="&gt;&gt;bunifuLabel1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bunifuToggleSwitch1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;bunifuLabel1.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="bunifuLabel2.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Segoe UI'; font-size: 9pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
+  <data name="bunifuLabel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="bunifuLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>599, 150</value>
+  </data>
+  <data name="bunifuLabel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
+  <data name="bunifuLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 20</value>
+  </data>
+  <data name="bunifuLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="bunifuLabel2.Text" xml:space="preserve">
+    <value>bunifuLabel2</value>
+  </data>
+  <data name="&gt;&gt;bunifuLabel2.Name" xml:space="preserve">
+    <value>bunifuLabel2</value>
+  </data>
+  <data name="&gt;&gt;bunifuLabel2.Type" xml:space="preserve">
+    <value>Bunifu.UI.WinForms.BunifuLabel, Bunifu.UI.WinForms, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9</value>
+  </data>
+  <data name="&gt;&gt;bunifuLabel2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bunifuLabel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="bunifuButton21.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -190,7 +199,7 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="bunifuButton21.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 494</value>
+    <value>152, 438</value>
   </data>
   <data name="bunifuButton21.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 39</value>
@@ -214,19 +223,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>120, 120</value>
-  </data>
-  <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
-    <value>GrowAndShrink</value>
-  </data>
-  <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>None</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>1000, 650</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>SettingsUserControl</value>
+    <value>settingsUserControl1</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

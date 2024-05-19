@@ -215,6 +215,34 @@ namespace MultiFaceRec
             }
         }
 
+        private void settingImageButton_Click(object sender, EventArgs e)
+        {
+            settingsUserControl11.BringToFront();
+            settingImageButton.ZoomOut();
+        }
+
+        private void faceRecImageButton_Click(object sender, EventArgs e)
+        {
+            facerecBackgroundUserControl.SendToBack();
+            settingsUserControl11.SendToBack();
+            faceRecImageButton.ZoomOut();
+        }
+
+        private void JournalLabel_MouseEnter(object sender, EventArgs e)
+        {
+            JournalImageButton.ZoomIn();
+        }
+
+        private void JournalLabel_MouseLeave(object sender, EventArgs e)
+        {
+            JournalImageButton.ZoomOut();
+        }
+
+        private void JournalImageButton_Click(object sender, EventArgs e)
+        {
+            JournalImageButton.ZoomOut();
+        }
+
         private void ResetNamePersons()
         {
             label3.Text = "0";

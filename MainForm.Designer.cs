@@ -41,25 +41,29 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
+            this.bunifuFormDrag1 = new Bunifu.UI.WinForms.BunifuFormDrag();
+            this.bunifuGradientPanel1 = new Bunifu.UI.WinForms.BunifuGradientPanel();
+            this.bunifuGroupBox1 = new Bunifu.UI.WinForms.BunifuGroupBox();
+            this.bunifuImageButton1 = new Bunifu.UI.WinForms.BunifuImageButton();
+            this.bunifuFormControlBox1 = new Bunifu.UI.WinForms.BunifuFormControlBox();
+            this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
+            this.facerecBackgroundUserControl = new Bunifu.UI.WinForms.BunifuUserControl();
+            this.settingsUserControl11 = new MultiFaceRec.settingsUserControl1();
             this.sidebar = new Bunifu.UI.WinForms.BunifuPanel();
+            this.JournalLabel = new Bunifu.UI.WinForms.BunifuLabel();
+            this.JournalImageButton = new Bunifu.UI.WinForms.BunifuImageButton();
             this.settingsLabel = new Bunifu.UI.WinForms.BunifuLabel();
             this.settingImageButton = new Bunifu.UI.WinForms.BunifuImageButton();
             this.faceRecLabel = new Bunifu.UI.WinForms.BunifuLabel();
             this.faceRecImageButton = new Bunifu.UI.WinForms.BunifuImageButton();
-            this.bunifuFormControlBox1 = new Bunifu.UI.WinForms.BunifuFormControlBox();
-            this.bunifuGradientPanel1 = new Bunifu.UI.WinForms.BunifuGradientPanel();
-            this.bunifuFormDrag1 = new Bunifu.UI.WinForms.BunifuFormDrag();
-            this.bunifuImageButton1 = new Bunifu.UI.WinForms.BunifuImageButton();
-            this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
-            this.bunifuGroupBox1 = new Bunifu.UI.WinForms.BunifuGroupBox();
+            this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
-            this.sidebar.SuspendLayout();
             this.bunifuGradientPanel1.SuspendLayout();
             this.bunifuGroupBox1.SuspendLayout();
+            this.sidebar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -193,138 +197,101 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // imageBoxFrameGrabber
+            // bunifuFormDrag1
             // 
-            this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(329, 84);
-            this.imageBoxFrameGrabber.Margin = new System.Windows.Forms.Padding(4);
-            this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
-            this.imageBoxFrameGrabber.Size = new System.Drawing.Size(426, 295);
-            this.imageBoxFrameGrabber.TabIndex = 4;
-            this.imageBoxFrameGrabber.TabStop = false;
+            this.bunifuFormDrag1.AllowOpacityChangesWhileDragging = false;
+            this.bunifuFormDrag1.ContainerControl = this;
+            this.bunifuFormDrag1.DockIndicatorsOpacity = 0.5D;
+            this.bunifuFormDrag1.DockingIndicatorsColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(215)))), ((int)(((byte)(233)))));
+            this.bunifuFormDrag1.DockingOptions.DockAll = false;
+            this.bunifuFormDrag1.DockingOptions.DockBottomLeft = false;
+            this.bunifuFormDrag1.DockingOptions.DockBottomRight = false;
+            this.bunifuFormDrag1.DockingOptions.DockFullScreen = false;
+            this.bunifuFormDrag1.DockingOptions.DockLeft = false;
+            this.bunifuFormDrag1.DockingOptions.DockRight = false;
+            this.bunifuFormDrag1.DockingOptions.DockTopLeft = true;
+            this.bunifuFormDrag1.DockingOptions.DockTopRight = true;
+            this.bunifuFormDrag1.DragOpacity = 0.9D;
+            this.bunifuFormDrag1.Enabled = true;
+            this.bunifuFormDrag1.ParentForm = this;
+            this.bunifuFormDrag1.ShowCursorChanges = true;
+            this.bunifuFormDrag1.ShowDockingIndicators = true;
+            this.bunifuFormDrag1.TitleBarOptions.BunifuFormDrag = this.bunifuFormDrag1;
+            this.bunifuFormDrag1.TitleBarOptions.DoubleClickToExpandWindow = true;
+            this.bunifuFormDrag1.TitleBarOptions.Enabled = true;
+            this.bunifuFormDrag1.TitleBarOptions.TitleBarControl = this.bunifuGradientPanel1;
+            this.bunifuFormDrag1.TitleBarOptions.UseBackColorOnDockingIndicators = false;
             // 
-            // sidebar
+            // bunifuGradientPanel1
             // 
-            this.sidebar.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.sidebar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sidebar.BackgroundImage")));
-            this.sidebar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.sidebar.BorderColor = System.Drawing.Color.Transparent;
-            this.sidebar.BorderRadius = 0;
-            this.sidebar.BorderThickness = 0;
-            this.sidebar.Controls.Add(this.settingsLabel);
-            this.sidebar.Controls.Add(this.settingImageButton);
-            this.sidebar.Controls.Add(this.faceRecLabel);
-            this.sidebar.Controls.Add(this.faceRecImageButton);
-            this.sidebar.Location = new System.Drawing.Point(0, 39);
-            this.sidebar.MaximumSize = new System.Drawing.Size(245, 700);
-            this.sidebar.MinimumSize = new System.Drawing.Size(70, 700);
-            this.sidebar.Name = "sidebar";
-            this.sidebar.ShowBorders = true;
-            this.sidebar.Size = new System.Drawing.Size(245, 700);
-            this.sidebar.TabIndex = 10;
+            this.bunifuGradientPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
+            this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuGradientPanel1.BorderRadius = 0;
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuGroupBox1);
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuFormControlBox1);
+            this.bunifuGradientPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bunifuGradientPanel1.GradientBottomLeft = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
+            this.bunifuGradientPanel1.GradientBottomRight = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(179)))), ((int)(((byte)(222)))));
+            this.bunifuGradientPanel1.GradientTopLeft = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
+            this.bunifuGradientPanel1.GradientTopRight = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
+            this.bunifuGradientPanel1.Location = new System.Drawing.Point(0, 0);
+            this.bunifuGradientPanel1.Name = "bunifuGradientPanel1";
+            this.bunifuGradientPanel1.Quality = 10;
+            this.bunifuGradientPanel1.Size = new System.Drawing.Size(1280, 40);
+            this.bunifuGradientPanel1.TabIndex = 12;
             // 
-            // settingsLabel
+            // bunifuGroupBox1
             // 
-            this.settingsLabel.AllowParentOverrides = false;
-            this.settingsLabel.AutoEllipsis = false;
-            this.settingsLabel.CursorType = null;
-            this.settingsLabel.Font = new System.Drawing.Font("Involve", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.settingsLabel.Location = new System.Drawing.Point(69, 616);
-            this.settingsLabel.Name = "settingsLabel";
-            this.settingsLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.settingsLabel.Size = new System.Drawing.Size(110, 26);
-            this.settingsLabel.TabIndex = 3;
-            this.settingsLabel.Text = "Настройки";
-            this.settingsLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.settingsLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            this.settingsLabel.MouseEnter += new System.EventHandler(this.settingsLabel_MouseEnter);
-            this.settingsLabel.MouseLeave += new System.EventHandler(this.settingsLabel_MouseLeave);
+            this.bunifuGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
+            this.bunifuGroupBox1.BorderColor = System.Drawing.Color.Transparent;
+            this.bunifuGroupBox1.BorderRadius = 0;
+            this.bunifuGroupBox1.BorderThickness = 1;
+            this.bunifuGroupBox1.Controls.Add(this.bunifuImageButton1);
+            this.bunifuGroupBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bunifuGroupBox1.LabelAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.bunifuGroupBox1.LabelIndent = 10;
+            this.bunifuGroupBox1.LineStyle = Bunifu.UI.WinForms.BunifuGroupBox.LineStyles.Solid;
+            this.bunifuGroupBox1.Location = new System.Drawing.Point(3, 0);
+            this.bunifuGroupBox1.Name = "bunifuGroupBox1";
+            this.bunifuGroupBox1.Size = new System.Drawing.Size(74, 44);
+            this.bunifuGroupBox1.TabIndex = 13;
+            this.bunifuGroupBox1.TabStop = false;
             // 
-            // settingImageButton
+            // bunifuImageButton1
             // 
-            this.settingImageButton.ActiveImage = null;
-            this.settingImageButton.AllowAnimations = true;
-            this.settingImageButton.AllowBuffering = false;
-            this.settingImageButton.AllowToggling = false;
-            this.settingImageButton.AllowZooming = true;
-            this.settingImageButton.AllowZoomingOnFocus = false;
-            this.settingImageButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.settingImageButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.settingImageButton.ErrorImage = ((System.Drawing.Image)(resources.GetObject("settingImageButton.ErrorImage")));
-            this.settingImageButton.FadeWhenInactive = false;
-            this.settingImageButton.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
-            this.settingImageButton.Image = global::MultiFaceRec.Properties.Resources.windows_settings_app_icon_292036;
-            this.settingImageButton.ImageActive = null;
-            this.settingImageButton.ImageLocation = null;
-            this.settingImageButton.ImageMargin = 20;
-            this.settingImageButton.ImageSize = new System.Drawing.Size(40, 40);
-            this.settingImageButton.ImageZoomSize = new System.Drawing.Size(60, 60);
-            this.settingImageButton.InitialImage = ((System.Drawing.Image)(resources.GetObject("settingImageButton.InitialImage")));
-            this.settingImageButton.Location = new System.Drawing.Point(3, 596);
-            this.settingImageButton.Name = "settingImageButton";
-            this.settingImageButton.Rotation = 0;
-            this.settingImageButton.ShowActiveImage = true;
-            this.settingImageButton.ShowCursorChanges = true;
-            this.settingImageButton.ShowImageBorders = true;
-            this.settingImageButton.ShowSizeMarkers = false;
-            this.settingImageButton.Size = new System.Drawing.Size(60, 60);
-            this.settingImageButton.TabIndex = 2;
-            this.settingImageButton.ToolTipText = "";
-            this.settingImageButton.WaitOnLoad = false;
-            this.settingImageButton.Zoom = 20;
-            this.settingImageButton.ZoomSpeed = 10;
-            // 
-            // faceRecLabel
-            // 
-            this.faceRecLabel.AllowParentOverrides = false;
-            this.faceRecLabel.AutoEllipsis = false;
-            this.faceRecLabel.Cursor = System.Windows.Forms.Cursors.Default;
-            this.faceRecLabel.CursorType = System.Windows.Forms.Cursors.Default;
-            this.faceRecLabel.Font = new System.Drawing.Font("Involve", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.faceRecLabel.Location = new System.Drawing.Point(69, 44);
-            this.faceRecLabel.Name = "faceRecLabel";
-            this.faceRecLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.faceRecLabel.Size = new System.Drawing.Size(161, 26);
-            this.faceRecLabel.TabIndex = 1;
-            this.faceRecLabel.Text = "Распознование";
-            this.faceRecLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.faceRecLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            this.faceRecLabel.MouseEnter += new System.EventHandler(this.faceRecLabel_MouseEnter);
-            this.faceRecLabel.MouseLeave += new System.EventHandler(this.faceRecLabel_MouseLeave);
-            // 
-            // faceRecImageButton
-            // 
-            this.faceRecImageButton.ActiveImage = null;
-            this.faceRecImageButton.AllowAnimations = true;
-            this.faceRecImageButton.AllowBuffering = false;
-            this.faceRecImageButton.AllowToggling = false;
-            this.faceRecImageButton.AllowZooming = true;
-            this.faceRecImageButton.AllowZoomingOnFocus = false;
-            this.faceRecImageButton.BackColor = System.Drawing.Color.Gainsboro;
-            this.faceRecImageButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.faceRecImageButton.ErrorImage = ((System.Drawing.Image)(resources.GetObject("faceRecImageButton.ErrorImage")));
-            this.faceRecImageButton.FadeWhenInactive = false;
-            this.faceRecImageButton.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
-            this.faceRecImageButton.Image = global::MultiFaceRec.Properties.Resources.png_transparent_facial_recognition_system_computer_icons_reconnaissance_text_emoticon_black_and_white;
-            this.faceRecImageButton.ImageActive = null;
-            this.faceRecImageButton.ImageLocation = null;
-            this.faceRecImageButton.ImageMargin = 20;
-            this.faceRecImageButton.ImageSize = new System.Drawing.Size(40, 40);
-            this.faceRecImageButton.ImageZoomSize = new System.Drawing.Size(60, 60);
-            this.faceRecImageButton.InitialImage = ((System.Drawing.Image)(resources.GetObject("faceRecImageButton.InitialImage")));
-            this.faceRecImageButton.Location = new System.Drawing.Point(3, 24);
-            this.faceRecImageButton.Name = "faceRecImageButton";
-            this.faceRecImageButton.Rotation = 0;
-            this.faceRecImageButton.ShowActiveImage = true;
-            this.faceRecImageButton.ShowCursorChanges = true;
-            this.faceRecImageButton.ShowImageBorders = true;
-            this.faceRecImageButton.ShowSizeMarkers = false;
-            this.faceRecImageButton.Size = new System.Drawing.Size(60, 60);
-            this.faceRecImageButton.TabIndex = 0;
-            this.faceRecImageButton.ToolTipText = "";
-            this.faceRecImageButton.WaitOnLoad = false;
-            this.faceRecImageButton.Zoom = 20;
-            this.faceRecImageButton.ZoomSpeed = 10;
+            this.bunifuImageButton1.ActiveImage = null;
+            this.bunifuImageButton1.AllowAnimations = true;
+            this.bunifuImageButton1.AllowBuffering = false;
+            this.bunifuImageButton1.AllowToggling = false;
+            this.bunifuImageButton1.AllowZooming = true;
+            this.bunifuImageButton1.AllowZoomingOnFocus = false;
+            this.bunifuImageButton1.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuImageButton1.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.bunifuImageButton1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.ErrorImage")));
+            this.bunifuImageButton1.FadeWhenInactive = false;
+            this.bunifuImageButton1.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
+            this.bunifuImageButton1.Image = global::MultiFaceRec.Properties.Resources.png_transparent_menu_feather_icon;
+            this.bunifuImageButton1.ImageActive = null;
+            this.bunifuImageButton1.ImageLocation = null;
+            this.bunifuImageButton1.ImageMargin = 20;
+            this.bunifuImageButton1.ImageSize = new System.Drawing.Size(30, 30);
+            this.bunifuImageButton1.ImageZoomSize = new System.Drawing.Size(50, 50);
+            this.bunifuImageButton1.InitialImage = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.InitialImage")));
+            this.bunifuImageButton1.Location = new System.Drawing.Point(6, -6);
+            this.bunifuImageButton1.Name = "bunifuImageButton1";
+            this.bunifuImageButton1.Rotation = 0;
+            this.bunifuImageButton1.ShowActiveImage = true;
+            this.bunifuImageButton1.ShowCursorChanges = true;
+            this.bunifuImageButton1.ShowImageBorders = true;
+            this.bunifuImageButton1.ShowSizeMarkers = false;
+            this.bunifuImageButton1.Size = new System.Drawing.Size(50, 50);
+            this.bunifuImageButton1.TabIndex = 4;
+            this.bunifuImageButton1.ToolTipText = "";
+            this.bunifuImageButton1.WaitOnLoad = false;
+            this.bunifuImageButton1.Zoom = 20;
+            this.bunifuImageButton1.ZoomSpeed = 10;
+            this.bunifuImageButton1.Click += new System.EventHandler(this.bunifuImageButton1_Click);
             // 
             // bunifuFormControlBox1
             // 
@@ -390,106 +357,234 @@
             this.bunifuFormControlBox1.TabIndex = 11;
             this.bunifuFormControlBox1.HelpClicked += new System.EventHandler(this.bunifuFormControlBox1_HelpClicked);
             // 
-            // bunifuGradientPanel1
-            // 
-            this.bunifuGradientPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
-            this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bunifuGradientPanel1.BorderRadius = 0;
-            this.bunifuGradientPanel1.Controls.Add(this.bunifuGroupBox1);
-            this.bunifuGradientPanel1.Controls.Add(this.bunifuFormControlBox1);
-            this.bunifuGradientPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bunifuGradientPanel1.GradientBottomLeft = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
-            this.bunifuGradientPanel1.GradientBottomRight = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(179)))), ((int)(((byte)(222)))));
-            this.bunifuGradientPanel1.GradientTopLeft = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
-            this.bunifuGradientPanel1.GradientTopRight = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
-            this.bunifuGradientPanel1.Location = new System.Drawing.Point(0, 0);
-            this.bunifuGradientPanel1.Name = "bunifuGradientPanel1";
-            this.bunifuGradientPanel1.Quality = 10;
-            this.bunifuGradientPanel1.Size = new System.Drawing.Size(1280, 40);
-            this.bunifuGradientPanel1.TabIndex = 12;
-            // 
-            // bunifuFormDrag1
-            // 
-            this.bunifuFormDrag1.AllowOpacityChangesWhileDragging = false;
-            this.bunifuFormDrag1.ContainerControl = this;
-            this.bunifuFormDrag1.DockIndicatorsOpacity = 0.5D;
-            this.bunifuFormDrag1.DockingIndicatorsColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(215)))), ((int)(((byte)(233)))));
-            this.bunifuFormDrag1.DockingOptions.DockAll = false;
-            this.bunifuFormDrag1.DockingOptions.DockBottomLeft = false;
-            this.bunifuFormDrag1.DockingOptions.DockBottomRight = false;
-            this.bunifuFormDrag1.DockingOptions.DockFullScreen = false;
-            this.bunifuFormDrag1.DockingOptions.DockLeft = false;
-            this.bunifuFormDrag1.DockingOptions.DockRight = false;
-            this.bunifuFormDrag1.DockingOptions.DockTopLeft = true;
-            this.bunifuFormDrag1.DockingOptions.DockTopRight = true;
-            this.bunifuFormDrag1.DragOpacity = 0.9D;
-            this.bunifuFormDrag1.Enabled = true;
-            this.bunifuFormDrag1.ParentForm = this;
-            this.bunifuFormDrag1.ShowCursorChanges = true;
-            this.bunifuFormDrag1.ShowDockingIndicators = true;
-            this.bunifuFormDrag1.TitleBarOptions.BunifuFormDrag = this.bunifuFormDrag1;
-            this.bunifuFormDrag1.TitleBarOptions.DoubleClickToExpandWindow = true;
-            this.bunifuFormDrag1.TitleBarOptions.Enabled = true;
-            this.bunifuFormDrag1.TitleBarOptions.TitleBarControl = this.bunifuGradientPanel1;
-            this.bunifuFormDrag1.TitleBarOptions.UseBackColorOnDockingIndicators = false;
-            // 
-            // bunifuImageButton1
-            // 
-            this.bunifuImageButton1.ActiveImage = null;
-            this.bunifuImageButton1.AllowAnimations = true;
-            this.bunifuImageButton1.AllowBuffering = false;
-            this.bunifuImageButton1.AllowToggling = false;
-            this.bunifuImageButton1.AllowZooming = true;
-            this.bunifuImageButton1.AllowZoomingOnFocus = false;
-            this.bunifuImageButton1.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuImageButton1.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.bunifuImageButton1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.ErrorImage")));
-            this.bunifuImageButton1.FadeWhenInactive = false;
-            this.bunifuImageButton1.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
-            this.bunifuImageButton1.Image = global::MultiFaceRec.Properties.Resources.png_transparent_menu_feather_icon;
-            this.bunifuImageButton1.ImageActive = null;
-            this.bunifuImageButton1.ImageLocation = null;
-            this.bunifuImageButton1.ImageMargin = 20;
-            this.bunifuImageButton1.ImageSize = new System.Drawing.Size(30, 30);
-            this.bunifuImageButton1.ImageZoomSize = new System.Drawing.Size(50, 50);
-            this.bunifuImageButton1.InitialImage = ((System.Drawing.Image)(resources.GetObject("bunifuImageButton1.InitialImage")));
-            this.bunifuImageButton1.Location = new System.Drawing.Point(6, -6);
-            this.bunifuImageButton1.Name = "bunifuImageButton1";
-            this.bunifuImageButton1.Rotation = 0;
-            this.bunifuImageButton1.ShowActiveImage = true;
-            this.bunifuImageButton1.ShowCursorChanges = true;
-            this.bunifuImageButton1.ShowImageBorders = true;
-            this.bunifuImageButton1.ShowSizeMarkers = false;
-            this.bunifuImageButton1.Size = new System.Drawing.Size(50, 50);
-            this.bunifuImageButton1.TabIndex = 4;
-            this.bunifuImageButton1.ToolTipText = "";
-            this.bunifuImageButton1.WaitOnLoad = false;
-            this.bunifuImageButton1.Zoom = 20;
-            this.bunifuImageButton1.ZoomSpeed = 10;
-            this.bunifuImageButton1.Click += new System.EventHandler(this.bunifuImageButton1_Click);
-            // 
             // sidebarTimer
             // 
             this.sidebarTimer.Interval = 20;
             this.sidebarTimer.Tick += new System.EventHandler(this.sidebarTimer_Tick);
             // 
-            // bunifuGroupBox1
+            // facerecBackgroundUserControl
             // 
-            this.bunifuGroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
-            this.bunifuGroupBox1.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuGroupBox1.BorderRadius = 0;
-            this.bunifuGroupBox1.BorderThickness = 1;
-            this.bunifuGroupBox1.Controls.Add(this.bunifuImageButton1);
-            this.bunifuGroupBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bunifuGroupBox1.LabelAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.bunifuGroupBox1.LabelIndent = 10;
-            this.bunifuGroupBox1.LineStyle = Bunifu.UI.WinForms.BunifuGroupBox.LineStyles.Solid;
-            this.bunifuGroupBox1.Location = new System.Drawing.Point(3, 0);
-            this.bunifuGroupBox1.Name = "bunifuGroupBox1";
-            this.bunifuGroupBox1.Size = new System.Drawing.Size(74, 44);
-            this.bunifuGroupBox1.TabIndex = 13;
-            this.bunifuGroupBox1.TabStop = false;
+            this.facerecBackgroundUserControl.AllowAnimations = false;
+            this.facerecBackgroundUserControl.AllowBorderColorChanges = false;
+            this.facerecBackgroundUserControl.AllowMouseEffects = false;
+            this.facerecBackgroundUserControl.AnimationSpeed = 200;
+            this.facerecBackgroundUserControl.BackColor = System.Drawing.Color.Transparent;
+            this.facerecBackgroundUserControl.BackgroundColor = System.Drawing.Color.White;
+            this.facerecBackgroundUserControl.BorderColor = System.Drawing.Color.Transparent;
+            this.facerecBackgroundUserControl.BorderRadius = 0;
+            this.facerecBackgroundUserControl.BorderStyle = Bunifu.UI.WinForms.BunifuUserControl.BorderStyles.Solid;
+            this.facerecBackgroundUserControl.BorderThickness = 0;
+            this.facerecBackgroundUserControl.ColorContrastOnClick = 30;
+            this.facerecBackgroundUserControl.ColorContrastOnHover = 30;
+            this.facerecBackgroundUserControl.Cursor = System.Windows.Forms.Cursors.Default;
+            this.facerecBackgroundUserControl.Image = null;
+            this.facerecBackgroundUserControl.ImageMargin = new System.Windows.Forms.Padding(0);
+            this.facerecBackgroundUserControl.Location = new System.Drawing.Point(251, 46);
+            this.facerecBackgroundUserControl.Name = "facerecBackgroundUserControl";
+            this.facerecBackgroundUserControl.ShowBorders = true;
+            this.facerecBackgroundUserControl.Size = new System.Drawing.Size(1000, 650);
+            this.facerecBackgroundUserControl.Style = Bunifu.UI.WinForms.BunifuUserControl.UserControlStyles.Flat;
+            this.facerecBackgroundUserControl.TabIndex = 13;
+            // 
+            // settingsUserControl11
+            // 
+            this.settingsUserControl11.Location = new System.Drawing.Point(251, 46);
+            this.settingsUserControl11.Name = "settingsUserControl11";
+            this.settingsUserControl11.Size = new System.Drawing.Size(1000, 650);
+            this.settingsUserControl11.TabIndex = 14;
+            // 
+            // sidebar
+            // 
+            this.sidebar.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.sidebar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sidebar.BackgroundImage")));
+            this.sidebar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.sidebar.BorderColor = System.Drawing.Color.Transparent;
+            this.sidebar.BorderRadius = 0;
+            this.sidebar.BorderThickness = 0;
+            this.sidebar.Controls.Add(this.JournalLabel);
+            this.sidebar.Controls.Add(this.JournalImageButton);
+            this.sidebar.Controls.Add(this.settingsLabel);
+            this.sidebar.Controls.Add(this.settingImageButton);
+            this.sidebar.Controls.Add(this.faceRecLabel);
+            this.sidebar.Controls.Add(this.faceRecImageButton);
+            this.sidebar.Location = new System.Drawing.Point(0, 39);
+            this.sidebar.MaximumSize = new System.Drawing.Size(245, 700);
+            this.sidebar.MinimumSize = new System.Drawing.Size(70, 700);
+            this.sidebar.Name = "sidebar";
+            this.sidebar.ShowBorders = true;
+            this.sidebar.Size = new System.Drawing.Size(245, 700);
+            this.sidebar.TabIndex = 10;
+            // 
+            // JournalLabel
+            // 
+            this.JournalLabel.AllowParentOverrides = false;
+            this.JournalLabel.AutoEllipsis = false;
+            this.JournalLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.JournalLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.JournalLabel.Font = new System.Drawing.Font("Involve", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.JournalLabel.Location = new System.Drawing.Point(69, 133);
+            this.JournalLabel.Name = "JournalLabel";
+            this.JournalLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.JournalLabel.Size = new System.Drawing.Size(79, 26);
+            this.JournalLabel.TabIndex = 5;
+            this.JournalLabel.Text = "Журнал";
+            this.JournalLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.JournalLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            this.JournalLabel.Click += new System.EventHandler(this.JournalImageButton_Click);
+            this.JournalLabel.MouseEnter += new System.EventHandler(this.JournalLabel_MouseEnter);
+            this.JournalLabel.MouseLeave += new System.EventHandler(this.JournalLabel_MouseLeave);
+            // 
+            // JournalImageButton
+            // 
+            this.JournalImageButton.ActiveImage = null;
+            this.JournalImageButton.AllowAnimations = true;
+            this.JournalImageButton.AllowBuffering = false;
+            this.JournalImageButton.AllowToggling = false;
+            this.JournalImageButton.AllowZooming = true;
+            this.JournalImageButton.AllowZoomingOnFocus = false;
+            this.JournalImageButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.JournalImageButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.JournalImageButton.ErrorImage = ((System.Drawing.Image)(resources.GetObject("JournalImageButton.ErrorImage")));
+            this.JournalImageButton.FadeWhenInactive = false;
+            this.JournalImageButton.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
+            this.JournalImageButton.Image = global::MultiFaceRec.Properties.Resources.journal1;
+            this.JournalImageButton.ImageActive = null;
+            this.JournalImageButton.ImageLocation = null;
+            this.JournalImageButton.ImageMargin = 20;
+            this.JournalImageButton.ImageSize = new System.Drawing.Size(40, 40);
+            this.JournalImageButton.ImageZoomSize = new System.Drawing.Size(60, 60);
+            this.JournalImageButton.InitialImage = ((System.Drawing.Image)(resources.GetObject("JournalImageButton.InitialImage")));
+            this.JournalImageButton.Location = new System.Drawing.Point(3, 113);
+            this.JournalImageButton.Name = "JournalImageButton";
+            this.JournalImageButton.Rotation = 0;
+            this.JournalImageButton.ShowActiveImage = true;
+            this.JournalImageButton.ShowCursorChanges = true;
+            this.JournalImageButton.ShowImageBorders = true;
+            this.JournalImageButton.ShowSizeMarkers = false;
+            this.JournalImageButton.Size = new System.Drawing.Size(60, 60);
+            this.JournalImageButton.TabIndex = 4;
+            this.JournalImageButton.ToolTipText = "";
+            this.JournalImageButton.WaitOnLoad = false;
+            this.JournalImageButton.Zoom = 20;
+            this.JournalImageButton.ZoomSpeed = 10;
+            this.JournalImageButton.Click += new System.EventHandler(this.JournalImageButton_Click);
+            // 
+            // settingsLabel
+            // 
+            this.settingsLabel.AllowParentOverrides = false;
+            this.settingsLabel.AutoEllipsis = false;
+            this.settingsLabel.CursorType = null;
+            this.settingsLabel.Font = new System.Drawing.Font("Involve", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.settingsLabel.Location = new System.Drawing.Point(69, 616);
+            this.settingsLabel.Name = "settingsLabel";
+            this.settingsLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.settingsLabel.Size = new System.Drawing.Size(110, 26);
+            this.settingsLabel.TabIndex = 3;
+            this.settingsLabel.Text = "Настройки";
+            this.settingsLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.settingsLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            this.settingsLabel.Click += new System.EventHandler(this.settingImageButton_Click);
+            this.settingsLabel.MouseEnter += new System.EventHandler(this.settingsLabel_MouseEnter);
+            this.settingsLabel.MouseLeave += new System.EventHandler(this.settingsLabel_MouseLeave);
+            // 
+            // settingImageButton
+            // 
+            this.settingImageButton.ActiveImage = null;
+            this.settingImageButton.AllowAnimations = true;
+            this.settingImageButton.AllowBuffering = false;
+            this.settingImageButton.AllowToggling = false;
+            this.settingImageButton.AllowZooming = true;
+            this.settingImageButton.AllowZoomingOnFocus = false;
+            this.settingImageButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.settingImageButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.settingImageButton.ErrorImage = ((System.Drawing.Image)(resources.GetObject("settingImageButton.ErrorImage")));
+            this.settingImageButton.FadeWhenInactive = false;
+            this.settingImageButton.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
+            this.settingImageButton.Image = global::MultiFaceRec.Properties.Resources.windows_settings_app_icon_292036;
+            this.settingImageButton.ImageActive = null;
+            this.settingImageButton.ImageLocation = null;
+            this.settingImageButton.ImageMargin = 20;
+            this.settingImageButton.ImageSize = new System.Drawing.Size(40, 40);
+            this.settingImageButton.ImageZoomSize = new System.Drawing.Size(60, 60);
+            this.settingImageButton.InitialImage = ((System.Drawing.Image)(resources.GetObject("settingImageButton.InitialImage")));
+            this.settingImageButton.Location = new System.Drawing.Point(3, 596);
+            this.settingImageButton.Name = "settingImageButton";
+            this.settingImageButton.Rotation = 0;
+            this.settingImageButton.ShowActiveImage = true;
+            this.settingImageButton.ShowCursorChanges = true;
+            this.settingImageButton.ShowImageBorders = true;
+            this.settingImageButton.ShowSizeMarkers = false;
+            this.settingImageButton.Size = new System.Drawing.Size(60, 60);
+            this.settingImageButton.TabIndex = 2;
+            this.settingImageButton.ToolTipText = "";
+            this.settingImageButton.WaitOnLoad = false;
+            this.settingImageButton.Zoom = 20;
+            this.settingImageButton.ZoomSpeed = 10;
+            this.settingImageButton.Click += new System.EventHandler(this.settingImageButton_Click);
+            // 
+            // faceRecLabel
+            // 
+            this.faceRecLabel.AllowParentOverrides = false;
+            this.faceRecLabel.AutoEllipsis = false;
+            this.faceRecLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.faceRecLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.faceRecLabel.Font = new System.Drawing.Font("Involve", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.faceRecLabel.Location = new System.Drawing.Point(69, 44);
+            this.faceRecLabel.Name = "faceRecLabel";
+            this.faceRecLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.faceRecLabel.Size = new System.Drawing.Size(161, 26);
+            this.faceRecLabel.TabIndex = 1;
+            this.faceRecLabel.Text = "Распознование";
+            this.faceRecLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.faceRecLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            this.faceRecLabel.Click += new System.EventHandler(this.faceRecImageButton_Click);
+            this.faceRecLabel.MouseEnter += new System.EventHandler(this.faceRecLabel_MouseEnter);
+            this.faceRecLabel.MouseLeave += new System.EventHandler(this.faceRecLabel_MouseLeave);
+            // 
+            // faceRecImageButton
+            // 
+            this.faceRecImageButton.ActiveImage = null;
+            this.faceRecImageButton.AllowAnimations = true;
+            this.faceRecImageButton.AllowBuffering = false;
+            this.faceRecImageButton.AllowToggling = false;
+            this.faceRecImageButton.AllowZooming = true;
+            this.faceRecImageButton.AllowZoomingOnFocus = false;
+            this.faceRecImageButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.faceRecImageButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.faceRecImageButton.ErrorImage = ((System.Drawing.Image)(resources.GetObject("faceRecImageButton.ErrorImage")));
+            this.faceRecImageButton.FadeWhenInactive = false;
+            this.faceRecImageButton.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
+            this.faceRecImageButton.Image = global::MultiFaceRec.Properties.Resources.png_transparent_facial_recognition_system_computer_icons_reconnaissance_text_emoticon_black_and_white;
+            this.faceRecImageButton.ImageActive = null;
+            this.faceRecImageButton.ImageLocation = null;
+            this.faceRecImageButton.ImageMargin = 20;
+            this.faceRecImageButton.ImageSize = new System.Drawing.Size(40, 40);
+            this.faceRecImageButton.ImageZoomSize = new System.Drawing.Size(60, 60);
+            this.faceRecImageButton.InitialImage = ((System.Drawing.Image)(resources.GetObject("faceRecImageButton.InitialImage")));
+            this.faceRecImageButton.Location = new System.Drawing.Point(3, 24);
+            this.faceRecImageButton.Name = "faceRecImageButton";
+            this.faceRecImageButton.Rotation = 0;
+            this.faceRecImageButton.ShowActiveImage = true;
+            this.faceRecImageButton.ShowCursorChanges = true;
+            this.faceRecImageButton.ShowImageBorders = true;
+            this.faceRecImageButton.ShowSizeMarkers = false;
+            this.faceRecImageButton.Size = new System.Drawing.Size(60, 60);
+            this.faceRecImageButton.TabIndex = 0;
+            this.faceRecImageButton.ToolTipText = "";
+            this.faceRecImageButton.WaitOnLoad = false;
+            this.faceRecImageButton.Zoom = 20;
+            this.faceRecImageButton.ZoomSpeed = 10;
+            this.faceRecImageButton.Click += new System.EventHandler(this.faceRecImageButton_Click);
+            // 
+            // imageBoxFrameGrabber
+            // 
+            this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(294, 102);
+            this.imageBoxFrameGrabber.Margin = new System.Windows.Forms.Padding(4);
+            this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
+            this.imageBoxFrameGrabber.Size = new System.Drawing.Size(426, 295);
+            this.imageBoxFrameGrabber.TabIndex = 4;
+            this.imageBoxFrameGrabber.TabStop = false;
             // 
             // FrmPrincipal
             // 
@@ -505,6 +600,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imageBoxFrameGrabber);
+            this.Controls.Add(this.facerecBackgroundUserControl);
+            this.Controls.Add(this.settingsUserControl11);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -518,11 +615,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
-            this.sidebar.ResumeLayout(false);
-            this.sidebar.PerformLayout();
             this.bunifuGradientPanel1.ResumeLayout(false);
             this.bunifuGroupBox1.ResumeLayout(false);
+            this.sidebar.ResumeLayout(false);
+            this.sidebar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -552,6 +649,10 @@
         private Bunifu.UI.WinForms.BunifuFormDrag bunifuFormDrag1;
         private System.Windows.Forms.Timer sidebarTimer;
         private Bunifu.UI.WinForms.BunifuGroupBox bunifuGroupBox1;
+        private Bunifu.UI.WinForms.BunifuUserControl facerecBackgroundUserControl;
+        private settingsUserControl1 settingsUserControl11;
+        private Bunifu.UI.WinForms.BunifuLabel JournalLabel;
+        private Bunifu.UI.WinForms.BunifuImageButton JournalImageButton;
     }
 }
 

@@ -10,24 +10,11 @@ using System.Windows.Forms;
 
 namespace MultiFaceRec
 {
-    public partial class SettingsUserControl : UserControl
+    public partial class settingsUserControl1 : UserControl
     {
-        public SettingsUserControl()
+        public settingsUserControl1()
         {
             InitializeComponent();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SettingsUserControl_Load(object sender, EventArgs e)
-        {
-            /*for (int i = 0; i < Global.WebCams.Length; i++) 
-            {
-                comboBox1.Items.Add(Global.WebCams[i]);
-            }*/
         }
     }
 }
