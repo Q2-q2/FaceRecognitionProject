@@ -7,6 +7,8 @@ using Emgu.CV.Structure;
 using Emgu.CV.CvEnum;
 using System.IO;
 using System.Threading.Tasks;
+using Bunifu.UI.WinForms;
+using System.Linq;
 
 namespace MultiFaceRec
 {
@@ -35,6 +37,7 @@ namespace MultiFaceRec
         {
             public DateTime Timestamp;
             public string RecognizedPerson;
+            public string ImagePath; // Добавлено поле для пути к изображению
         }
 
         // List to store log entries
@@ -47,11 +50,99 @@ namespace MultiFaceRec
 
             InitializeHaarCascades();
             LoadTrainingData();
+
+            // Подключаем событие ValueChanged для DatePicker
+            journalUserControl1.DatePicker.ValueChanged += DatePicker_ValueChanged;
+
+            // Обновляем логи для текущей выбранной даты при запуске формы
+            FilterLogsByDate();
+
+            // Подключаем обработчик событий SelectedIndexChanged для LogListBox
+            journalUserControl1.AddLogListBoxSelectedIndexChangedEventHandler(LogListBox_SelectedIndexChanged);
+
+            // Создаем каталог для текущего дня, если он еще не был создан
+            CreateDailyPhotoDirectory();
         }
 
         private void InitializeHaarCascades()
         {
             _faceCascade = new HaarCascade("haarcascade_frontalface_default.xml");
+        }
+
+        private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            CleanTrainedLabelsFile();
+            SaveLogEntries();
+        }
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+            CleanTrainedLabelsFile();
+            LoadLogEntries();
+        }
+
+        private void CreateDailyPhotoDirectory()
+        {
+            string dailyDirPath = Path.Combine(Application.StartupPath, "savedPhotos", DateTime.Now.ToString("yyyy-MM-dd"));
+            if (!Directory.Exists(dailyDirPath))
+            {
+                Directory.CreateDirectory(dailyDirPath);
+            }
+        }
+
+        private void LoadLogEntries()
+        {
+            var logFilePath = Path.Combine(Application.StartupPath, "logEntries.txt");
+            if (File.Exists(logFilePath))
+            {
+                _logEntries.Clear(); // Очистка списка перед загрузкой
+                var lines = File.ReadAllLines(logFilePath);
+                foreach (var line in lines)
+                {
+                    var parts = line.Split(';'); // Используем точку с запятой в качестве разделителя
+                    if (parts.Length == 3)
+                    {
+                        var timestamp = DateTime.Parse(parts[0]);
+                        var recognizedPerson = parts[1].Trim(); // Убираем лишние пробелы
+                        var imagePath = parts[2].Trim(); // Убираем лишние пробелы
+                        _logEntries.Add(new LogEntry { Timestamp = timestamp, RecognizedPerson = recognizedPerson, ImagePath = imagePath });
+                    }
+                }
+                // Display the log entries
+                DisplayLogEntries();
+            }
+        }
+
+        private void SaveLogEntries()
+        {
+            var logFilePath = Path.Combine(Application.StartupPath, "logEntries.txt");
+            using (var writer = new StreamWriter(logFilePath))
+            {
+                foreach (var entry in _logEntries)
+                {
+                    writer.WriteLine($"{entry.Timestamp};{entry.RecognizedPerson.Trim()};{entry.ImagePath.Trim()}"); // Добавлено поле для пути к изображению
+                }
+            }
+        }
+
+        private void CleanTrainedLabelsFile()
+        {
+            var trainedLabelsPath = Path.Combine(Application.StartupPath, "TrainedFaces", "TrainedLabels.txt");
+
+            // Проверяем, существует ли файл
+            if (!File.Exists(trainedLabelsPath))
+            {
+                return;
+            }
+
+            // Читаем все строки из файла
+            var lines = File.ReadAllLines(trainedLabelsPath);
+
+            // Фильтруем пустые строки
+            var cleanedLines = lines.Where(line => !string.IsNullOrWhiteSpace(line)).ToArray();
+
+            // Перезаписываем файл очищенными строками
+            File.WriteAllLines(trainedLabelsPath, cleanedLines);
+
         }
 
         private void LoadTrainingData()
@@ -76,10 +167,6 @@ namespace MultiFaceRec
             }
         }
 
-        private void FrmPrincipal_Load(object sender, EventArgs e)
-        {
-        }
-
         private void bunifuFormControlBox1_HelpClicked(object sender, EventArgs e)
         {
         }
@@ -88,7 +175,7 @@ namespace MultiFaceRec
         {
             InitializeCapture();
             Application.Idle += FrameGrabber;
-            button1.Enabled = false;
+            cameraOnButton.Enabled = false;
         }
 
         private void InitializeCapture()
@@ -110,7 +197,8 @@ namespace MultiFaceRec
                 LogEntry entry = new LogEntry
                 {
                     Timestamp = DateTime.Now,
-                    RecognizedPerson = _name
+                    RecognizedPerson = _name,
+                    ImagePath = Path.Combine(Application.StartupPath, "TrainedFaces", $"face{_contTrain}.bmp") // Add this line to store the image path
                 };
                 _logEntries.Add(entry);
 
@@ -122,7 +210,6 @@ namespace MultiFaceRec
                 MessageBox.Show("Enable the face detection first", "Training Fail", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
-
 
         private void TrainNewFace()
         {
@@ -140,6 +227,22 @@ namespace MultiFaceRec
             _trainingImages.Add(_trainedFace);
             _labels.Add(textBox1.Text);
             imageBox1.Image = _trainedFace;
+
+            // Save the image to a file
+            var faceFilePath = Path.Combine(Application.StartupPath, "TrainedFaces", $"face{_contTrain}.bmp");
+            _trainedFace.Save(faceFilePath);
+
+            // Log the date and time of the button click along with the recognized face and image path
+            LogEntry entry = new LogEntry
+            {
+                Timestamp = DateTime.Now,
+                RecognizedPerson = textBox1.Text,
+                ImagePath = faceFilePath
+            };
+            _logEntries.Add(entry);
+
+            // Display the log entries
+            DisplayLogEntries();
         }
 
         private void SaveTrainedFaces()
@@ -153,7 +256,7 @@ namespace MultiFaceRec
                 {
                     var faceFilePath = Path.Combine(Application.StartupPath, "TrainedFaces", $"face{i + 1}.bmp");
                     _trainingImages[i].Save(faceFilePath);
-                    writer.WriteLine(_labels[i] + "%");
+                    writer.WriteLine($"{_labels[i]}%");
                 }
             }
         }
@@ -272,16 +375,30 @@ namespace MultiFaceRec
 
         private void bunifuButton21_Click(object sender, EventArgs e)
         {
+            SaveCurrentFrame();
             // Log the date and time of the button click along with the recognized face
             LogEntry entry = new LogEntry
             {
                 Timestamp = DateTime.Now,
-                RecognizedPerson = _name
+                RecognizedPerson = _name,
+                ImagePath = Path.Combine(Application.StartupPath, "savedPhotos", DateTime.Now.ToString("yyyy-MM-dd"), $"{DateTime.Now:yyyyMMddHHmmss}.bmp") // Add this line to store the image path
             };
             _logEntries.Add(entry);
 
             // Display the log entries
             DisplayLogEntries();
+        }
+
+        private void SaveCurrentFrame()
+        {
+            string dailyDirPath = Path.Combine(Application.StartupPath, "savedPhotos", DateTime.Now.ToString("yyyy-MM-dd"));
+            if (!Directory.Exists(dailyDirPath))
+            {
+                Directory.CreateDirectory(dailyDirPath);
+            }
+
+            string filePath = Path.Combine(dailyDirPath, $"{DateTime.Now:yyyyMMddHHmmss}.bmp");
+            _currentFrame.Save(filePath);
         }
 
         private void ProcessDetectedFaces(MCvAvgComp[][] facesDetected)
@@ -325,13 +442,50 @@ namespace MultiFaceRec
         // Method to display log entries
         private void DisplayLogEntries()
         {
-            // Access the ListBox through the UserControl's exposed property
-            /*journalUserControl1.LogListBox.Items.Clear();*/
+            // Очищаем ListBox перед добавлением новых записей
+            journalUserControl1.LogListBox.Items.Clear();
+
             foreach (var entry in _logEntries)
             {
-                journalUserControl1.LogListBox.Items.Add($"{entry.Timestamp}: {entry.RecognizedPerson}");
+                journalUserControl1.LogListBox.Items.Add($"{entry.Timestamp};{entry.RecognizedPerson}"); // Не добавляем пробел после разделителя
+            }
+
+            // Attach the event handler
+            journalUserControl1.LogListBox.SelectedIndexChanged += LogListBox_SelectedIndexChanged;
+        }
+
+        private void LogListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (journalUserControl1.LogListBox.SelectedIndex == -1)
+                return;
+
+            // Get the selected log entry
+            var selectedLog = _logEntries[journalUserControl1.LogListBox.SelectedIndex];
+
+            // Load and display the image
+            if (File.Exists(selectedLog.ImagePath))
+            {
+                journalUserControl1.LogImageBox.Image = new Image<Bgr, byte>(selectedLog.ImagePath); // Загрузка изображения в ImageBox
             }
         }
 
+        private void DatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            FilterLogsByDate();
+        }
+
+        private void FilterLogsByDate()
+        {
+            journalUserControl1.LogListBox.Items.Clear();
+            DateTime selectedDate = journalUserControl1.DatePicker.Value.Date;
+
+            foreach (var entry in _logEntries)
+            {
+                if (entry.Timestamp.Date == selectedDate)
+                {
+                    journalUserControl1.LogListBox.Items.Add($"{entry.Timestamp};{entry.RecognizedPerson}"); // Используем точку с запятой как разделитель
+                }
+            }
+        }
     }
 }
