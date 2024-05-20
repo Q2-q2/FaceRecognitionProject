@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace MultiFaceRec
 {
-    public partial class settingsUserControl1 : UserControl
+    public partial class JournalUserControl : UserControl
     {
-        public settingsUserControl1()
+        public JournalUserControl()
         {
             InitializeComponent();
         }
+        public ListBox LogListBox
+        {
+            get { return listBoxLogs; }
+        }
+
     }
 }

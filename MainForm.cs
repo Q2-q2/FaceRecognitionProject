@@ -30,6 +30,16 @@ namespace MultiFaceRec
 
         bool sidebarExpand = true;
 
+        // Structure to store log entries
+        private struct LogEntry
+        {
+            public DateTime Timestamp;
+            public string RecognizedPerson;
+        }
+
+        // List to store log entries
+        private List<LogEntry> _logEntries = new List<LogEntry>();
+
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -37,8 +47,6 @@ namespace MultiFaceRec
 
             InitializeHaarCascades();
             LoadTrainingData();
-
-            // Flip the image horizontally for display
         }
 
         private void InitializeHaarCascades()
@@ -70,13 +78,11 @@ namespace MultiFaceRec
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-
         }
+
         private void bunifuFormControlBox1_HelpClicked(object sender, EventArgs e)
         {
-
         }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -99,12 +105,24 @@ namespace MultiFaceRec
                 TrainNewFace();
                 SaveTrainedFaces();
                 MessageBox.Show($"{textBox1.Text}'s face detected and added :)", "Training OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Log the date and time of the button click along with the recognized face
+                LogEntry entry = new LogEntry
+                {
+                    Timestamp = DateTime.Now,
+                    RecognizedPerson = _name
+                };
+                _logEntries.Add(entry);
+
+                // Display the log entries
+                DisplayLogEntries();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Enable the face detection first", "Training Fail", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
+
 
         private void TrainNewFace()
         {
@@ -195,10 +213,10 @@ namespace MultiFaceRec
 
         private void sidebarTimer_Tick(object sender, EventArgs e)
         {
-            if(sidebarExpand == true)
+            if (sidebarExpand == true)
             {
                 sidebar.Width -= 100;
-                if(sidebar.Width == sidebar.MinimumSize.Width)
+                if (sidebar.Width == sidebar.MinimumSize.Width)
                 {
                     sidebarTimer.Stop();
                     sidebarExpand = false;
@@ -217,14 +235,16 @@ namespace MultiFaceRec
 
         private void settingImageButton_Click(object sender, EventArgs e)
         {
-            settingsUserControl11.BringToFront();
+            /*settingsUserControl11.BringToFront();*/
             settingImageButton.ZoomOut();
         }
 
         private void faceRecImageButton_Click(object sender, EventArgs e)
         {
             facerecBackgroundUserControl.SendToBack();
-            settingsUserControl11.SendToBack();
+            /*            settingsUserControl11.SendToBack();
+            */
+            journalUserControl1.SendToBack();
             faceRecImageButton.ZoomOut();
         }
 
@@ -240,6 +260,7 @@ namespace MultiFaceRec
 
         private void JournalImageButton_Click(object sender, EventArgs e)
         {
+            journalUserControl1.BringToFront();
             JournalImageButton.ZoomOut();
         }
 
@@ -247,6 +268,20 @@ namespace MultiFaceRec
         {
             label3.Text = "0";
             _namePersons.Clear();
+        }
+
+        private void bunifuButton21_Click(object sender, EventArgs e)
+        {
+            // Log the date and time of the button click along with the recognized face
+            LogEntry entry = new LogEntry
+            {
+                Timestamp = DateTime.Now,
+                RecognizedPerson = _name
+            };
+            _logEntries.Add(entry);
+
+            // Display the log entries
+            DisplayLogEntries();
         }
 
         private void ProcessDetectedFaces(MCvAvgComp[][] facesDetected)
@@ -286,5 +321,17 @@ namespace MultiFaceRec
             label4.Text = _names;
             _names = string.Empty;
         }
+
+        // Method to display log entries
+        private void DisplayLogEntries()
+        {
+            // Access the ListBox through the UserControl's exposed property
+            /*journalUserControl1.LogListBox.Items.Clear();*/
+            foreach (var entry in _logEntries)
+            {
+                journalUserControl1.LogListBox.Items.Add($"{entry.Timestamp}: {entry.RecognizedPerson}");
+            }
+        }
+
     }
 }

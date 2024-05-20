@@ -121,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EigenObjectRecognizer.cs" />
+    <Compile Include="JournalUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="JournalUserControl.Designer.cs">
+      <DependentUpon>JournalUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,12 +140,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SettingsUserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SettingsUserControl1.Designer.cs">
-      <DependentUpon>SettingsUserControl1.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="JournalUserControl.resx">
+      <DependentUpon>JournalUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,9 +150,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SettingsUserControl1.resx">
-      <DependentUpon>SettingsUserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
