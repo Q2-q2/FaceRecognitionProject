@@ -439,6 +439,21 @@ namespace MultiFaceRec
             _names = string.Empty;
         }
 
+        private void bunifuLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addFaceLabel_MouseEnter(object sender, EventArgs e)
+        {
+            addFaceImageButton.ZoomIn();
+        }
+
+        private void addFaceLabel_MouseLeave(object sender, EventArgs e)
+        {
+            addFaceImageButton.ZoomOut();
+        }
+
         // Method to display log entries
         private void DisplayLogEntries()
         {

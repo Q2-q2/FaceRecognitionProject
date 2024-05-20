@@ -83,6 +83,26 @@ namespace MultiFaceRec.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Plusico {
+            get {
+                object obj = ResourceManager.GetObject("Plusico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plusicon {
+            get {
+                object obj = ResourceManager.GetObject("plusicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap png_transparent_facial_recognition_system_computer_icons_reconnaissance_text_emoticon_black_and_white {
             get {
                 object obj = ResourceManager.GetObject("png-transparent-facial-recognition-system-computer-icons-reconnaissance-text-emot" +

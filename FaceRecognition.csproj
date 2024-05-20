@@ -120,6 +120,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddFaceUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddFaceUserControl.Designer.cs">
+      <DependentUpon>AddFaceUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="EigenObjectRecognizer.cs" />
     <Compile Include="JournalUserControl.cs">
       <SubType>UserControl</SubType>
@@ -140,6 +146,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddFaceUserControl.resx">
+      <DependentUpon>AddFaceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="JournalUserControl.resx">
       <DependentUpon>JournalUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,6 +220,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\journal1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plusicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plusico.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

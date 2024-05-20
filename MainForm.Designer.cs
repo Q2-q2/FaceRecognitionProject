@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges11 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges12 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges10 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
@@ -48,6 +48,8 @@
             this.sidebarTimer = new System.Windows.Forms.Timer(this.components);
             this.facerecBackgroundUserControl = new Bunifu.UI.WinForms.BunifuUserControl();
             this.sidebar = new Bunifu.UI.WinForms.BunifuPanel();
+            this.addFaceLabel = new Bunifu.UI.WinForms.BunifuLabel();
+            this.addFaceImageButton = new Bunifu.UI.WinForms.BunifuImageButton();
             this.JournalLabel = new Bunifu.UI.WinForms.BunifuLabel();
             this.JournalImageButton = new Bunifu.UI.WinForms.BunifuImageButton();
             this.settingsLabel = new Bunifu.UI.WinForms.BunifuLabel();
@@ -344,6 +346,8 @@
             this.sidebar.BorderColor = System.Drawing.Color.Transparent;
             this.sidebar.BorderRadius = 0;
             this.sidebar.BorderThickness = 0;
+            this.sidebar.Controls.Add(this.addFaceLabel);
+            this.sidebar.Controls.Add(this.addFaceImageButton);
             this.sidebar.Controls.Add(this.JournalLabel);
             this.sidebar.Controls.Add(this.JournalImageButton);
             this.sidebar.Controls.Add(this.settingsLabel);
@@ -358,6 +362,59 @@
             this.sidebar.Size = new System.Drawing.Size(245, 700);
             this.sidebar.TabIndex = 10;
             // 
+            // addFaceLabel
+            // 
+            this.addFaceLabel.AllowParentOverrides = false;
+            this.addFaceLabel.AutoEllipsis = false;
+            this.addFaceLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.addFaceLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.addFaceLabel.Font = new System.Drawing.Font("Involve", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addFaceLabel.Location = new System.Drawing.Point(69, 130);
+            this.addFaceLabel.Name = "addFaceLabel";
+            this.addFaceLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.addFaceLabel.Size = new System.Drawing.Size(170, 26);
+            this.addFaceLabel.TabIndex = 7;
+            this.addFaceLabel.Text = "Добавление лиц";
+            this.addFaceLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.addFaceLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            this.addFaceLabel.Click += new System.EventHandler(this.bunifuLabel1_Click);
+            this.addFaceLabel.MouseEnter += new System.EventHandler(this.addFaceLabel_MouseEnter);
+            this.addFaceLabel.MouseLeave += new System.EventHandler(this.addFaceLabel_MouseLeave);
+            // 
+            // addFaceImageButton
+            // 
+            this.addFaceImageButton.ActiveImage = null;
+            this.addFaceImageButton.AllowAnimations = true;
+            this.addFaceImageButton.AllowBuffering = false;
+            this.addFaceImageButton.AllowToggling = false;
+            this.addFaceImageButton.AllowZooming = true;
+            this.addFaceImageButton.AllowZoomingOnFocus = false;
+            this.addFaceImageButton.BackColor = System.Drawing.Color.Gainsboro;
+            this.addFaceImageButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.addFaceImageButton.ErrorImage = ((System.Drawing.Image)(resources.GetObject("addFaceImageButton.ErrorImage")));
+            this.addFaceImageButton.FadeWhenInactive = false;
+            this.addFaceImageButton.Flip = Bunifu.UI.WinForms.BunifuImageButton.FlipOrientation.Normal;
+            this.addFaceImageButton.Image = global::MultiFaceRec.Properties.Resources.Plusico;
+            this.addFaceImageButton.ImageActive = null;
+            this.addFaceImageButton.ImageLocation = null;
+            this.addFaceImageButton.ImageMargin = 20;
+            this.addFaceImageButton.ImageSize = new System.Drawing.Size(40, 40);
+            this.addFaceImageButton.ImageZoomSize = new System.Drawing.Size(60, 60);
+            this.addFaceImageButton.InitialImage = ((System.Drawing.Image)(resources.GetObject("addFaceImageButton.InitialImage")));
+            this.addFaceImageButton.Location = new System.Drawing.Point(3, 110);
+            this.addFaceImageButton.Name = "addFaceImageButton";
+            this.addFaceImageButton.Rotation = 0;
+            this.addFaceImageButton.ShowActiveImage = true;
+            this.addFaceImageButton.ShowCursorChanges = true;
+            this.addFaceImageButton.ShowImageBorders = true;
+            this.addFaceImageButton.ShowSizeMarkers = false;
+            this.addFaceImageButton.Size = new System.Drawing.Size(60, 60);
+            this.addFaceImageButton.TabIndex = 6;
+            this.addFaceImageButton.ToolTipText = "";
+            this.addFaceImageButton.WaitOnLoad = false;
+            this.addFaceImageButton.Zoom = 20;
+            this.addFaceImageButton.ZoomSpeed = 10;
+            // 
             // JournalLabel
             // 
             this.JournalLabel.AllowParentOverrides = false;
@@ -365,7 +422,7 @@
             this.JournalLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.JournalLabel.CursorType = System.Windows.Forms.Cursors.Default;
             this.JournalLabel.Font = new System.Drawing.Font("Involve", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.JournalLabel.Location = new System.Drawing.Point(69, 184);
+            this.JournalLabel.Location = new System.Drawing.Point(69, 215);
             this.JournalLabel.Name = "JournalLabel";
             this.JournalLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.JournalLabel.Size = new System.Drawing.Size(79, 26);
@@ -397,7 +454,7 @@
             this.JournalImageButton.ImageSize = new System.Drawing.Size(40, 40);
             this.JournalImageButton.ImageZoomSize = new System.Drawing.Size(60, 60);
             this.JournalImageButton.InitialImage = ((System.Drawing.Image)(resources.GetObject("JournalImageButton.InitialImage")));
-            this.JournalImageButton.Location = new System.Drawing.Point(3, 164);
+            this.JournalImageButton.Location = new System.Drawing.Point(3, 196);
             this.JournalImageButton.Name = "JournalImageButton";
             this.JournalImageButton.Rotation = 0;
             this.JournalImageButton.ShowActiveImage = true;
@@ -576,11 +633,11 @@
             this.cameraOnButton.ColorContrastOnClick = 45;
             this.cameraOnButton.ColorContrastOnHover = 45;
             this.cameraOnButton.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges3.BottomLeft = true;
-            borderEdges3.BottomRight = true;
-            borderEdges3.TopLeft = true;
-            borderEdges3.TopRight = true;
-            this.cameraOnButton.CustomizableEdges = borderEdges3;
+            borderEdges11.BottomLeft = true;
+            borderEdges11.BottomRight = true;
+            borderEdges11.TopLeft = true;
+            borderEdges11.TopRight = true;
+            this.cameraOnButton.CustomizableEdges = borderEdges11;
             this.cameraOnButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.cameraOnButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.cameraOnButton.DisabledFillColor = System.Drawing.Color.Empty;
@@ -687,11 +744,11 @@
             this.bunifuButton1.ColorContrastOnClick = 45;
             this.bunifuButton1.ColorContrastOnHover = 45;
             this.bunifuButton1.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges2.BottomLeft = true;
-            borderEdges2.BottomRight = true;
-            borderEdges2.TopLeft = true;
-            borderEdges2.TopRight = true;
-            this.bunifuButton1.CustomizableEdges = borderEdges2;
+            borderEdges12.BottomLeft = true;
+            borderEdges12.BottomRight = true;
+            borderEdges12.TopLeft = true;
+            borderEdges12.TopRight = true;
+            this.bunifuButton1.CustomizableEdges = borderEdges12;
             this.bunifuButton1.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton1.DisabledFillColor = System.Drawing.Color.Empty;
@@ -779,11 +836,11 @@
             this.bunifuButton2.ColorContrastOnClick = 45;
             this.bunifuButton2.ColorContrastOnHover = 45;
             this.bunifuButton2.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges1.BottomLeft = true;
-            borderEdges1.BottomRight = true;
-            borderEdges1.TopLeft = true;
-            borderEdges1.TopRight = true;
-            this.bunifuButton2.CustomizableEdges = borderEdges1;
+            borderEdges10.BottomLeft = true;
+            borderEdges10.BottomRight = true;
+            borderEdges10.TopLeft = true;
+            borderEdges10.TopRight = true;
+            this.bunifuButton2.CustomizableEdges = borderEdges10;
             this.bunifuButton2.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton2.DisabledFillColor = System.Drawing.Color.Empty;
@@ -921,6 +978,8 @@
         private Bunifu.UI.WinForms.BunifuGroupBox bunifuGroupBox3;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton2;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton1;
+        private Bunifu.UI.WinForms.BunifuLabel addFaceLabel;
+        private Bunifu.UI.WinForms.BunifuImageButton addFaceImageButton;
     }
 }
 
