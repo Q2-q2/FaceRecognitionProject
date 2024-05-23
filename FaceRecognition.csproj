@@ -146,6 +146,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingsUserControl.Designer.cs">
+      <DependentUpon>SettingsUserControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddFaceUserControl.resx">
       <DependentUpon>AddFaceUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,6 +165,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsUserControl.resx">
+      <DependentUpon>SettingsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -226,6 +235,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Plusico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

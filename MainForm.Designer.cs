@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges11 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges12 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges10 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
@@ -57,12 +57,13 @@
             this.faceRecLabel = new Bunifu.UI.WinForms.BunifuLabel();
             this.faceRecImageButton = new Bunifu.UI.WinForms.BunifuImageButton();
             this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
-            this.journalUserControl1 = new MultiFaceRec.JournalUserControl();
             this.bunifuGroupBox2 = new Bunifu.UI.WinForms.BunifuGroupBox();
             this.cameraOnButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.bunifuGroupBox3 = new Bunifu.UI.WinForms.BunifuGroupBox();
             this.bunifuButton1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.bunifuButton2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.journalUserControl1 = new MultiFaceRec.JournalUserControl();
+            this.addFaceUserControl1 = new MultiFaceRec.AddFaceUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.bunifuGradientPanel1.SuspendLayout();
             this.bunifuGroupBox1.SuspendLayout();
@@ -331,7 +332,7 @@
             this.facerecBackgroundUserControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.facerecBackgroundUserControl.Image = null;
             this.facerecBackgroundUserControl.ImageMargin = new System.Windows.Forms.Padding(0);
-            this.facerecBackgroundUserControl.Location = new System.Drawing.Point(268, 45);
+            this.facerecBackgroundUserControl.Location = new System.Drawing.Point(251, 46);
             this.facerecBackgroundUserControl.Name = "facerecBackgroundUserControl";
             this.facerecBackgroundUserControl.ShowBorders = true;
             this.facerecBackgroundUserControl.Size = new System.Drawing.Size(1000, 650);
@@ -377,7 +378,7 @@
             this.addFaceLabel.Text = "Добавление лиц";
             this.addFaceLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.addFaceLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            this.addFaceLabel.Click += new System.EventHandler(this.bunifuLabel1_Click);
+            this.addFaceLabel.Click += new System.EventHandler(this.addFaceImageButton_Click);
             this.addFaceLabel.MouseEnter += new System.EventHandler(this.addFaceLabel_MouseEnter);
             this.addFaceLabel.MouseLeave += new System.EventHandler(this.addFaceLabel_MouseLeave);
             // 
@@ -414,6 +415,7 @@
             this.addFaceImageButton.WaitOnLoad = false;
             this.addFaceImageButton.Zoom = 20;
             this.addFaceImageButton.ZoomSpeed = 10;
+            this.addFaceImageButton.Click += new System.EventHandler(this.addFaceImageButton_Click);
             // 
             // JournalLabel
             // 
@@ -586,14 +588,6 @@
             this.imageBoxFrameGrabber.TabIndex = 4;
             this.imageBoxFrameGrabber.TabStop = false;
             // 
-            // journalUserControl1
-            // 
-            this.journalUserControl1.BackColor = System.Drawing.Color.White;
-            this.journalUserControl1.Location = new System.Drawing.Point(251, 46);
-            this.journalUserControl1.Name = "journalUserControl1";
-            this.journalUserControl1.Size = new System.Drawing.Size(1000, 650);
-            this.journalUserControl1.TabIndex = 16;
-            // 
             // bunifuGroupBox2
             // 
             this.bunifuGroupBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(255)))));
@@ -633,11 +627,11 @@
             this.cameraOnButton.ColorContrastOnClick = 45;
             this.cameraOnButton.ColorContrastOnHover = 45;
             this.cameraOnButton.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges11.BottomLeft = true;
-            borderEdges11.BottomRight = true;
-            borderEdges11.TopLeft = true;
-            borderEdges11.TopRight = true;
-            this.cameraOnButton.CustomizableEdges = borderEdges11;
+            borderEdges3.BottomLeft = true;
+            borderEdges3.BottomRight = true;
+            borderEdges3.TopLeft = true;
+            borderEdges3.TopRight = true;
+            this.cameraOnButton.CustomizableEdges = borderEdges3;
             this.cameraOnButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.cameraOnButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.cameraOnButton.DisabledFillColor = System.Drawing.Color.Empty;
@@ -744,11 +738,11 @@
             this.bunifuButton1.ColorContrastOnClick = 45;
             this.bunifuButton1.ColorContrastOnHover = 45;
             this.bunifuButton1.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges12.BottomLeft = true;
-            borderEdges12.BottomRight = true;
-            borderEdges12.TopLeft = true;
-            borderEdges12.TopRight = true;
-            this.bunifuButton1.CustomizableEdges = borderEdges12;
+            borderEdges2.BottomLeft = true;
+            borderEdges2.BottomRight = true;
+            borderEdges2.TopLeft = true;
+            borderEdges2.TopRight = true;
+            this.bunifuButton1.CustomizableEdges = borderEdges2;
             this.bunifuButton1.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton1.DisabledFillColor = System.Drawing.Color.Empty;
@@ -836,11 +830,11 @@
             this.bunifuButton2.ColorContrastOnClick = 45;
             this.bunifuButton2.ColorContrastOnHover = 45;
             this.bunifuButton2.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges10.BottomLeft = true;
-            borderEdges10.BottomRight = true;
-            borderEdges10.TopLeft = true;
-            borderEdges10.TopRight = true;
-            this.bunifuButton2.CustomizableEdges = borderEdges10;
+            borderEdges1.BottomLeft = true;
+            borderEdges1.BottomRight = true;
+            borderEdges1.TopLeft = true;
+            borderEdges1.TopRight = true;
+            this.bunifuButton2.CustomizableEdges = borderEdges1;
             this.bunifuButton2.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton2.DisabledFillColor = System.Drawing.Color.Empty;
@@ -909,6 +903,21 @@
             this.bunifuButton2.UseDefaultRadiusAndThickness = true;
             this.bunifuButton2.Click += new System.EventHandler(this.bunifuButton21_Click);
             // 
+            // journalUserControl1
+            // 
+            this.journalUserControl1.BackColor = System.Drawing.Color.White;
+            this.journalUserControl1.Location = new System.Drawing.Point(251, 46);
+            this.journalUserControl1.Name = "journalUserControl1";
+            this.journalUserControl1.Size = new System.Drawing.Size(1000, 650);
+            this.journalUserControl1.TabIndex = 16;
+            // 
+            // addFaceUserControl1
+            // 
+            this.addFaceUserControl1.Location = new System.Drawing.Point(268, 46);
+            this.addFaceUserControl1.Name = "addFaceUserControl1";
+            this.addFaceUserControl1.Size = new System.Drawing.Size(1000, 650);
+            this.addFaceUserControl1.TabIndex = 21;
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -926,6 +935,7 @@
             this.Controls.Add(this.imageBoxFrameGrabber);
             this.Controls.Add(this.facerecBackgroundUserControl);
             this.Controls.Add(this.journalUserControl1);
+            this.Controls.Add(this.addFaceUserControl1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -980,6 +990,8 @@
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton1;
         private Bunifu.UI.WinForms.BunifuLabel addFaceLabel;
         private Bunifu.UI.WinForms.BunifuImageButton addFaceImageButton;
+        private AddFaceUserControl addFaceUserControl1;
+        private SettingsUserControl settingsUserControl1;
     }
 }
 

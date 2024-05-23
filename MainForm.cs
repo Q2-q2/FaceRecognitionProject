@@ -4,16 +4,19 @@ using System.Drawing;
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
+using Emgu.CV.CvEnum; // Ensure this namespace is imported
 using System.IO;
 using System.Threading.Tasks;
 using Bunifu.UI.WinForms;
 using System.Linq;
+using Newtonsoft.Json;
+using System.Media;
 
 namespace MultiFaceRec
 {
     public partial class FrmPrincipal : Form
     {
+        
         private Image<Bgr, byte> _currentFrame;
         private Capture _grabber;
         private HaarCascade _faceCascade;
@@ -28,7 +31,8 @@ namespace MultiFaceRec
 
         private int _contTrain, _numLabels, _t;
         private string _name, _names;
-        private bool _isProcessingFrame = false; // Для предотвращения обработки кадров, когда один уже обрабатывается
+        private bool _isProcessingFrame = false; 
+        private bool _isCameraOn = false;
 
         bool sidebarExpand = true;
 
@@ -42,6 +46,8 @@ namespace MultiFaceRec
 
         // List to store log entries
         private List<LogEntry> _logEntries = new List<LogEntry>();
+
+        private string settingsFilePath = Path.Combine(Application.StartupPath, "settings.json");
 
         public FrmPrincipal()
         {
@@ -62,6 +68,8 @@ namespace MultiFaceRec
 
             // Создаем каталог для текущего дня, если он еще не был создан
             CreateDailyPhotoDirectory();
+
+            LoadSettings();
         }
 
         private void InitializeHaarCascades()
@@ -173,9 +181,24 @@ namespace MultiFaceRec
 
         private void button1_Click(object sender, EventArgs e)
         {
-            InitializeCapture();
-            Application.Idle += FrameGrabber;
-            cameraOnButton.Enabled = false;
+            if (!_isCameraOn)
+            {
+                // Если камера выключена, включаем ее
+                InitializeCapture();
+                Application.Idle += FrameGrabber;
+                _isCameraOn = true;
+                cameraOnButton.Text = "Остановить камеру"; // Изменяем текст кнопки на "Stop Camera"
+            }
+            else
+            {
+                // Если камера включена, выключаем ее
+                _grabber.Dispose(); // Освобождаем ресурсы камеры
+                imageBoxFrameGrabber.Image = null; // Очищаем изображение на форме
+                Application.Idle -= FrameGrabber; // Отключаем обработчик события
+                _isCameraOn = false;
+                cameraOnButton.Text = "Включить камеру"; // Изменяем текст кнопки на "Start Camera"
+            }
+            PlaySound();
         }
 
         private void InitializeCapture()
@@ -183,6 +206,11 @@ namespace MultiFaceRec
             _grabber = new Capture();
             _grabber.QueryFrame();
             _grabber.FlipHorizontal = true;
+
+            var settings = LoadSettings();
+            _grabber.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_BRIGHTNESS, (settings.Brightness * 255) / 100);
+            _grabber.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_CONTRAST, (settings.Contrast * 255) / 100);
+            _grabber.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_SATURATION, (settings.Saturation * 255) / 100);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -263,6 +291,7 @@ namespace MultiFaceRec
 
         private async void FrameGrabber(object sender, EventArgs e)
         {
+            var settings = LoadSettings(); // Объявление и инициализация переменной settings
             if (_isProcessingFrame)
                 return;
 
@@ -274,11 +303,17 @@ namespace MultiFaceRec
                 _currentFrame = _grabber.QueryFrame().Resize(360, 280, INTER.CV_INTER_CUBIC);
                 _grayFrame = _currentFrame.Convert<Gray, byte>();
 
-                var facesDetected = _grayFrame.DetectHaarCascade(_faceCascade, 1.2, 10, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+                double scaleFactor = settings.Sensitivity / 10.0;
+                if (scaleFactor <= 1)
+                {
+                    scaleFactor = 1.1; // Установите минимальный коэффициент масштабирования
+                }
+
+                var facesDetected = _grayFrame.DetectHaarCascade(_faceCascade, scaleFactor, 10, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
 
                 if (facesDetected.Length > 0 && facesDetected[0].Length > 0)
                 {
-                    ProcessDetectedFaces(facesDetected);
+                    ProcessDetectedFaces(facesDetected, settings); // Передача settings
                 }
 
                 _names = string.Join(", ", _namePersons.ToArray());
@@ -338,15 +373,15 @@ namespace MultiFaceRec
 
         private void settingImageButton_Click(object sender, EventArgs e)
         {
-            /*settingsUserControl11.BringToFront();*/
+            settingsUserControl1.BringToFront();
             settingImageButton.ZoomOut();
         }
 
         private void faceRecImageButton_Click(object sender, EventArgs e)
         {
             facerecBackgroundUserControl.SendToBack();
-            /*            settingsUserControl11.SendToBack();
-            */
+            settingsUserControl1.SendToBack();
+            addFaceUserControl1.SendToBack();
             journalUserControl1.SendToBack();
             faceRecImageButton.ZoomOut();
         }
@@ -401,7 +436,7 @@ namespace MultiFaceRec
             _currentFrame.Save(filePath);
         }
 
-        private void ProcessDetectedFaces(MCvAvgComp[][] facesDetected)
+        private void ProcessDetectedFaces(MCvAvgComp[][] facesDetected, FaceRecognitionSettings settings) // Добавлен параметр settings
         {
             foreach (var face in facesDetected[0])
             {
@@ -422,7 +457,7 @@ namespace MultiFaceRec
 
         private void RecognizeFace()
         {
-            var termCrit = new MCvTermCriteria(_contTrain, 0.001);
+            var termCrit = new MCvTermCriteria(_contTrain);
             var recognizer = new EigenObjectRecognizer(
                 _trainingImages.ToArray(),
                 _labels.ToArray(),
@@ -452,6 +487,11 @@ namespace MultiFaceRec
         private void addFaceLabel_MouseLeave(object sender, EventArgs e)
         {
             addFaceImageButton.ZoomOut();
+        }
+
+        private void addFaceImageButton_Click(object sender, EventArgs e)
+        {
+            addFaceUserControl1.BringToFront();
         }
 
         // Method to display log entries
@@ -501,6 +541,29 @@ namespace MultiFaceRec
                     journalUserControl1.LogListBox.Items.Add($"{entry.Timestamp};{entry.RecognizedPerson}"); // Используем точку с запятой как разделитель
                 }
             }
+        }
+
+        private FaceRecognitionSettings LoadSettings()
+        {
+            if (File.Exists(@settingsFilePath))
+            {
+                var json = File.ReadAllText(@settingsFilePath);
+                return JsonConvert.DeserializeObject<FaceRecognitionSettings>(json);
+            }
+            return new FaceRecognitionSettings(); // Default settings
+        }
+
+        private void PlaySound()
+        {
+            var setting = LoadSettings();
+            if (setting.EnableNotifications == true) 
+            {
+                string soundirPath = Path.Combine(Application.StartupPath, "assets/sounds");
+                string filePath = Path.Combine(soundirPath, setting.Sound);
+
+                SoundPlayer sound = new SoundPlayer(@filePath);
+                sound.Play();
+            } 
         }
     }
 }
