@@ -11,12 +11,24 @@ using Bunifu.UI.WinForms;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Media;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+using System.Reflection;
+using Newtonsoft.Json.Linq;
+using Telegram.Bot.Polling;
+using System.Threading;
+using Telegram.Bot.Exceptions;
+using MultiFaceRec.Properties;
+using Bunifu.UI.WinForms.BunifuButton;
+using Bunifu.UI.WinForms.Renderers.Snackbar;
 
 namespace MultiFaceRec
 {
     public partial class FrmPrincipal : Form
     {
-        
+
         private Image<Bgr, byte> _currentFrame;
         private Capture _grabber;
         private HaarCascade _faceCascade;
@@ -31,23 +43,28 @@ namespace MultiFaceRec
 
         private int _contTrain, _numLabels, _t;
         private string _name, _names;
-        private bool _isProcessingFrame = false; 
+        private bool _isProcessingFrame = false;
         private bool _isCameraOn = false;
 
         bool sidebarExpand = true;
 
-        // Structure to store log entries
+        public static string appPath = AppDomain.CurrentDomain.BaseDirectory;
+
         private struct LogEntry
         {
             public DateTime Timestamp;
             public string RecognizedPerson;
-            public string ImagePath; // Добавлено поле для пути к изображению
+            public string ImagePath;
         }
 
-        // List to store log entries
         private List<LogEntry> _logEntries = new List<LogEntry>();
+        private List<LogEntry> _filteredLogEntries = new List<LogEntry>();
+        private bool _isFiltered = false;
 
         private string settingsFilePath = Path.Combine(Application.StartupPath, "settings.json");
+
+        private TelegramBotClient Bot;
+        private static readonly string Token = "6834231088:AAFU5qWJfveGrt9DImqGU1DI9rp_JTGrgMo"; // Замените на ваш токен
 
         public FrmPrincipal()
         {
@@ -60,16 +77,15 @@ namespace MultiFaceRec
             // Подключаем событие ValueChanged для DatePicker
             journalUserControl1.DatePicker.ValueChanged += DatePicker_ValueChanged;
 
-            // Обновляем логи для текущей выбранной даты при запуске формы
-            FilterLogsByDate();
-
             // Подключаем обработчик событий SelectedIndexChanged для LogListBox
-            journalUserControl1.AddLogListBoxSelectedIndexChangedEventHandler(LogListBox_SelectedIndexChanged);
+            InitializeJournalUserControl();
 
             // Создаем каталог для текущего дня, если он еще не был создан
             CreateDailyPhotoDirectory();
-
             LoadSettings();
+
+            InitializeTelegramBot();
+
         }
 
         private void InitializeHaarCascades()
@@ -86,6 +102,9 @@ namespace MultiFaceRec
         {
             CleanTrainedLabelsFile();
             LoadLogEntries();
+            RefreshLogs();
+            InitializeSounds(appPath);
+            FillComboBoxWithTrainedFaces();
         }
 
         private void CreateDailyPhotoDirectory()
@@ -97,16 +116,62 @@ namespace MultiFaceRec
             }
         }
 
+        private void InitializeJournalUserControl()
+        {
+            journalUserControl1.AddLogDataGridViewCellClickEventHandler(LogDataGridViewCellClick);
+            journalUserControl1.AddDatePickerValueChangedEventHandler(DatePickerValueChanged);
+        }
+        private void LogDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var logEntriesToUse = _isFiltered ? _filteredLogEntries : _logEntries;
+                if (e.RowIndex < logEntriesToUse.Count)
+                {
+                    var selectedLogEntry = logEntriesToUse[e.RowIndex];
+                    if (!string.IsNullOrEmpty(selectedLogEntry.ImagePath))
+                    {
+                        try
+                        {
+                            var img = new Emgu.CV.Image<Bgr, Byte>(selectedLogEntry.ImagePath);
+                            journalUserControl1.LogImageBox.Image = img;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error loading image: {ex.Message}");
+                        }
+                    }
+                    else
+                    {
+                        journalUserControl1.LogImageBox.Image = null;
+                    }
+                }
+            }
+        }
+        public void RefreshLogs()
+        {
+            journalUserControl1.LogDataGrid.Rows.Clear();
+            foreach (var entry in _logEntries)
+            {
+                journalUserControl1.LogDataGrid.Rows.Add(entry.Timestamp.ToString("HH:mm:ss"), entry.RecognizedPerson);
+            }
+            _isFiltered = false;
+        }
+        private void DatePickerValueChanged(object sender, EventArgs e)
+        {
+            // Обработка изменения даты в DatePicker в JournalUserControl
+            FilterLogsByDate();
+        }
         private void LoadLogEntries()
         {
             var logFilePath = Path.Combine(Application.StartupPath, "logEntries.txt");
-            if (File.Exists(logFilePath))
+            if (System.IO.File.Exists(logFilePath))
             {
                 _logEntries.Clear(); // Очистка списка перед загрузкой
-                var lines = File.ReadAllLines(logFilePath);
+                var lines = System.IO.File.ReadAllLines(logFilePath);
                 foreach (var line in lines)
                 {
-                    var parts = line.Split(';'); // Используем точку с запятой в качестве разделителя
+                    var parts = line.Split(','); // Используем точку с запятой в качестве разделителя
                     if (parts.Length == 3)
                     {
                         var timestamp = DateTime.Parse(parts[0]);
@@ -123,11 +188,13 @@ namespace MultiFaceRec
         private void SaveLogEntries()
         {
             var logFilePath = Path.Combine(Application.StartupPath, "logEntries.txt");
+
             using (var writer = new StreamWriter(logFilePath))
             {
                 foreach (var entry in _logEntries)
                 {
-                    writer.WriteLine($"{entry.Timestamp};{entry.RecognizedPerson.Trim()};{entry.ImagePath.Trim()}"); // Добавлено поле для пути к изображению
+                    string logLine = $"{entry.Timestamp:yyyy-MM-dd HH:mm:ss},{entry.RecognizedPerson.Trim()},{entry.ImagePath}";
+                    writer.WriteLine(logLine);
                 }
             }
         }
@@ -137,19 +204,19 @@ namespace MultiFaceRec
             var trainedLabelsPath = Path.Combine(Application.StartupPath, "TrainedFaces", "TrainedLabels.txt");
 
             // Проверяем, существует ли файл
-            if (!File.Exists(trainedLabelsPath))
+            if (!System.IO.File.Exists(trainedLabelsPath))
             {
                 return;
             }
 
             // Читаем все строки из файла
-            var lines = File.ReadAllLines(trainedLabelsPath);
+            var lines = System.IO.File.ReadAllLines(trainedLabelsPath);
 
             // Фильтруем пустые строки
             var cleanedLines = lines.Where(line => !string.IsNullOrWhiteSpace(line)).ToArray();
 
             // Перезаписываем файл очищенными строками
-            File.WriteAllLines(trainedLabelsPath, cleanedLines);
+            System.IO.File.WriteAllLines(trainedLabelsPath, cleanedLines);
 
         }
 
@@ -157,7 +224,7 @@ namespace MultiFaceRec
         {
             try
             {
-                string labelsInfo = File.ReadAllText(Path.Combine(Application.StartupPath, "TrainedFaces", "TrainedLabels.txt"));
+                string labelsInfo = System.IO.File.ReadAllText(Path.Combine(Application.StartupPath, "TrainedFaces", "TrainedLabels.txt"));
                 string[] labels = labelsInfo.Split('%');
                 _numLabels = Convert.ToInt32(labels[0]);
                 _contTrain = _numLabels;
@@ -188,6 +255,9 @@ namespace MultiFaceRec
                 Application.Idle += FrameGrabber;
                 _isCameraOn = true;
                 cameraOnButton.Text = "Остановить камеру"; // Изменяем текст кнопки на "Stop Camera"
+                bunifuButton2.Enabled = true;
+                bunifuButton1.Enabled = true;
+
             }
             else
             {
@@ -197,6 +267,8 @@ namespace MultiFaceRec
                 Application.Idle -= FrameGrabber; // Отключаем обработчик события
                 _isCameraOn = false;
                 cameraOnButton.Text = "Включить камеру"; // Изменяем текст кнопки на "Start Camera"
+                bunifuButton2.Enabled = false;
+                bunifuButton1.Enabled = false;
             }
             PlaySound();
         }
@@ -220,18 +292,7 @@ namespace MultiFaceRec
                 TrainNewFace();
                 SaveTrainedFaces();
                 MessageBox.Show($"{textBox1.Text}'s face detected and added :)", "Training OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Log the date and time of the button click along with the recognized face
-                LogEntry entry = new LogEntry
-                {
-                    Timestamp = DateTime.Now,
-                    RecognizedPerson = _name,
-                    ImagePath = Path.Combine(Application.StartupPath, "TrainedFaces", $"face{_contTrain}.bmp") // Add this line to store the image path
-                };
-                _logEntries.Add(entry);
-
-                // Display the log entries
-                DisplayLogEntries();
+                UpdateComboBoxNames();
             }
             catch (Exception ex)
             {
@@ -260,17 +321,6 @@ namespace MultiFaceRec
             var faceFilePath = Path.Combine(Application.StartupPath, "TrainedFaces", $"face{_contTrain}.bmp");
             _trainedFace.Save(faceFilePath);
 
-            // Log the date and time of the button click along with the recognized face and image path
-            LogEntry entry = new LogEntry
-            {
-                Timestamp = DateTime.Now,
-                RecognizedPerson = textBox1.Text,
-                ImagePath = faceFilePath
-            };
-            _logEntries.Add(entry);
-
-            // Display the log entries
-            DisplayLogEntries();
         }
 
         private void SaveTrainedFaces()
@@ -288,7 +338,125 @@ namespace MultiFaceRec
                 }
             }
         }
+        private void FillComboBoxWithTrainedFaces()
+        {
+            try
+            {
+                // Путь к файлу TrainedLabels.txt
+                string trainedLabelsFile = Path.Combine(Application.StartupPath, "TrainedFaces", "TrainedLabels.txt");
 
+                // Проверяем, существует ли файл TrainedLabels.txt
+                if (System.IO.File.Exists(trainedLabelsFile))
+                {
+                    // Считываем все строки из файла
+                    string[] lines = System.IO.File.ReadAllLines(trainedLabelsFile);
+
+                    // Получаем количество лиц из первой строки
+                    int numLabels = int.Parse(lines[0].Trim('%'));
+
+                    // Очищаем ComboBox перед добавлением новых имен
+                    comboBoxNames.Items.Clear();
+
+                    // Добавляем каждое имя лица из оставшихся строк в ComboBox
+                    for (int i = 1; i <= numLabels; i++)
+                    {
+                        string label = lines[i].Trim('%');
+                        comboBoxNames.Items.Add(label);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при заполнении ComboBox лицами: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DeleteSelectedFace()
+        {
+            try
+            {
+                if (comboBoxNames.SelectedItem != null)
+                {
+                    string selectedName = comboBoxNames.SelectedItem.ToString();
+
+                    // Получаем индекс выбранного имени из ComboBox
+                    int selectedIndex = comboBoxNames.SelectedIndex;
+
+                    // Путь к папке с запомненными лицами
+                    string trainedFacesDir = Path.Combine(Application.StartupPath, "TrainedFaces");
+
+                    // Путь к файлу TrainedLabels.txt
+                    string trainedLabelsFile = Path.Combine(trainedFacesDir, "TrainedLabels.txt");
+
+                    // Объявляем переменную numLabels
+                    int numLabels = 0;
+
+                    // Проверяем, существует ли файл TrainedLabels.txt
+                    if (System.IO.File.Exists(trainedLabelsFile))
+                    {
+                        // Читаем все строки из файла TrainedLabels.txt
+                        string[] lines = System.IO.File.ReadAllLines(trainedLabelsFile);
+
+                        // Получаем количество лиц из первой строки
+                        numLabels = int.Parse(lines[0].Trim('%'));
+
+                        // Обновляем количество лиц в файле TrainedLabels.txt
+                        numLabels--;
+
+                        // Удаляем имя из файла TrainedLabels.txt
+                        List<string> updatedLines = new List<string>(lines);
+                        updatedLines.RemoveAt(selectedIndex + 1); // Смещаемся на 1, потому что первая строка - это количество лиц
+                        System.IO.File.WriteAllLines(trainedLabelsFile, updatedLines);
+
+                        // Обновляем количество лиц в первой строке
+                        System.IO.File.WriteAllText(trainedLabelsFile, $"{numLabels}%\n" + string.Join("\n", updatedLines.Skip(1)));
+                    }
+
+                    // Удаляем файл .bmp, соответствующий выбранному имени
+                    string faceFilePath = Path.Combine(trainedFacesDir, $"face{selectedIndex + 1}.bmp");
+                    if (System.IO.File.Exists(faceFilePath))
+                    {
+                        System.IO.File.Delete(faceFilePath);
+                    }
+
+                    // Переименовываем оставшиеся файлы .bmp, чтобы индексы соответствовали их положению в списке лиц
+                    for (int i = selectedIndex + 1; i <= numLabels; i++)
+                    {
+                        string currentFaceFilePath = Path.Combine(trainedFacesDir, $"face{i + 1}.bmp");
+                        if (System.IO.File.Exists(currentFaceFilePath))
+                        {
+                            string newFaceFilePath = Path.Combine(trainedFacesDir, $"face{i}.bmp");
+                            System.IO.File.Move(currentFaceFilePath, newFaceFilePath);
+                        }
+                    }
+
+                    MessageBox.Show($"Лицо {selectedName} успешно удалено", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Обновляем ComboBox и имена лиц
+                    UpdateComboBoxNames();
+                    comboBoxNames.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите лицо для удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении лица: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        private void UpdateComboBoxNames()
+        {
+            comboBoxNames.Items.Clear();
+            foreach (var label in _labels)
+            {
+                comboBoxNames.Items.Add(label);
+            }
+        }
         private async void FrameGrabber(object sender, EventArgs e)
         {
             var settings = LoadSettings(); // Объявление и инициализация переменной settings
@@ -299,29 +467,42 @@ namespace MultiFaceRec
 
             await Task.Run(() =>
             {
-                ResetNamePersons();
-                _currentFrame = _grabber.QueryFrame().Resize(360, 280, INTER.CV_INTER_CUBIC);
-                _grayFrame = _currentFrame.Convert<Gray, byte>();
-
-                double scaleFactor = settings.Sensitivity / 10.0;
-                if (scaleFactor <= 1)
+                try
                 {
-                    scaleFactor = 1.1; // Установите минимальный коэффициент масштабирования
+                    ResetNamePersons();
+                    _currentFrame = _grabber.QueryFrame()?.Resize(360, 280, INTER.CV_INTER_CUBIC);
+                    if (_currentFrame == null) return;
+
+                    _grayFrame = _currentFrame.Convert<Gray, byte>();
+                    double scaleFactor = settings.Sensitivity / 10.0;
+                    if (scaleFactor <= 1)
+                    {
+                        scaleFactor = 1.1; // Установите минимальный коэффициент масштабирования
+                    }
+
+                    var facesDetected = _grayFrame.DetectHaarCascade(_faceCascade, scaleFactor, 10, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
+                    if (facesDetected.Length > 0 && facesDetected[0].Length > 0)
+                    {
+                        ProcessDetectedFaces(facesDetected); // Передача settings
+                    }
+
+                    _names = string.Join(", ", _namePersons.ToArray());
+                    UpdateUI();
+                    _namePersons.Clear();
                 }
-
-                var facesDetected = _grayFrame.DetectHaarCascade(_faceCascade, scaleFactor, 10, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new Size(20, 20));
-
-                if (facesDetected.Length > 0 && facesDetected[0].Length > 0)
+                catch (AccessViolationException ex)
                 {
-                    ProcessDetectedFaces(facesDetected, settings); // Передача settings
+                    MessageBox.Show("Access Violation Exception: " + ex.Message);
                 }
-
-                _names = string.Join(", ", _namePersons.ToArray());
-                UpdateUI();
-                _namePersons.Clear();
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+                finally
+                {
+                    _isProcessingFrame = false;
+                }
             });
-
-            _isProcessingFrame = false;
         }
 
         private void faceRecLabel_MouseEnter(object sender, EventArgs e)
@@ -373,15 +554,16 @@ namespace MultiFaceRec
 
         private void settingImageButton_Click(object sender, EventArgs e)
         {
-            settingsUserControl1.BringToFront();
+            addFaceButtonOff();
+            settingsUserControl2.BringToFront();
             settingImageButton.ZoomOut();
         }
 
         private void faceRecImageButton_Click(object sender, EventArgs e)
         {
+            addFaceButtonOff();
             facerecBackgroundUserControl.SendToBack();
-            settingsUserControl1.SendToBack();
-            addFaceUserControl1.SendToBack();
+            settingsUserControl2.SendToBack();
             journalUserControl1.SendToBack();
             faceRecImageButton.ZoomOut();
         }
@@ -398,6 +580,7 @@ namespace MultiFaceRec
 
         private void JournalImageButton_Click(object sender, EventArgs e)
         {
+            addFaceButtonOff();
             journalUserControl1.BringToFront();
             JournalImageButton.ZoomOut();
         }
@@ -422,6 +605,8 @@ namespace MultiFaceRec
 
             // Display the log entries
             DisplayLogEntries();
+
+            SendPhotoAsync(entry.ImagePath, entry.RecognizedPerson);
         }
 
         private void SaveCurrentFrame()
@@ -436,18 +621,18 @@ namespace MultiFaceRec
             _currentFrame.Save(filePath);
         }
 
-        private void ProcessDetectedFaces(MCvAvgComp[][] facesDetected, FaceRecognitionSettings settings) // Добавлен параметр settings
+        private void ProcessDetectedFaces(MCvAvgComp[][] facesDetected) // Добавлен параметр settings
         {
             foreach (var face in facesDetected[0])
             {
                 _t++;
                 _result = _currentFrame.Copy(face.rect).Convert<Gray, byte>().Resize(100, 100, INTER.CV_INTER_CUBIC);
-                _currentFrame.Draw(face.rect, new Bgr(Color.Red), 2);
+                _currentFrame.Draw(face.rect, new Bgr(System.Drawing.Color.Red), 2);
 
                 if (_trainingImages.Count != 0)
                 {
                     RecognizeFace();
-                    _currentFrame.Draw(_name, ref _font, new Point(face.rect.X - 2, face.rect.Y - 2), new Bgr(Color.LightGreen));
+                    _currentFrame.Draw(_name, ref _font, new Point(face.rect.X - 2, face.rect.Y - 2), new Bgr(System.Drawing.Color.LightGreen));
                 }
 
                 _namePersons.Add(_name);
@@ -457,7 +642,7 @@ namespace MultiFaceRec
 
         private void RecognizeFace()
         {
-            var termCrit = new MCvTermCriteria(_contTrain);
+            var termCrit = new MCvTermCriteria(_contTrain, 0.001);
             var recognizer = new EigenObjectRecognizer(
                 _trainingImages.ToArray(),
                 _labels.ToArray(),
@@ -491,36 +676,23 @@ namespace MultiFaceRec
 
         private void addFaceImageButton_Click(object sender, EventArgs e)
         {
-            addFaceUserControl1.BringToFront();
+            addFaceButtonOn();
+            facerecBackgroundUserControl.SendToBack();
+            settingsUserControl2.SendToBack();
+            journalUserControl1.SendToBack();
+            faceRecImageButton.ZoomOut();
         }
 
         // Method to display log entries
         private void DisplayLogEntries()
         {
-            // Очищаем ListBox перед добавлением новых записей
-            journalUserControl1.LogListBox.Items.Clear();
+            // Очищаем DataGridView перед добавлением новых записей
+            journalUserControl1.LogDataGrid.Rows.Clear();
 
             foreach (var entry in _logEntries)
             {
-                journalUserControl1.LogListBox.Items.Add($"{entry.Timestamp};{entry.RecognizedPerson}"); // Не добавляем пробел после разделителя
-            }
-
-            // Attach the event handler
-            journalUserControl1.LogListBox.SelectedIndexChanged += LogListBox_SelectedIndexChanged;
-        }
-
-        private void LogListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (journalUserControl1.LogListBox.SelectedIndex == -1)
-                return;
-
-            // Get the selected log entry
-            var selectedLog = _logEntries[journalUserControl1.LogListBox.SelectedIndex];
-
-            // Load and display the image
-            if (File.Exists(selectedLog.ImagePath))
-            {
-                journalUserControl1.LogImageBox.Image = new Image<Bgr, byte>(selectedLog.ImagePath); // Загрузка изображения в ImageBox
+                // Добавляем строку в DataGridView
+                journalUserControl1.LogDataGrid.Rows.Add(entry.Timestamp, entry.RecognizedPerson);
             }
         }
 
@@ -529,25 +701,26 @@ namespace MultiFaceRec
             FilterLogsByDate();
         }
 
-        private void FilterLogsByDate()
+        public void FilterLogsByDate()
         {
-            journalUserControl1.LogListBox.Items.Clear();
+            journalUserControl1.LogDataGrid.Rows.Clear();
             DateTime selectedDate = journalUserControl1.DatePicker.Value.Date;
+            _filteredLogEntries = _logEntries
+                .Where(entry => entry.Timestamp.Date == selectedDate)
+                .ToList();
+            _isFiltered = true;
 
-            foreach (var entry in _logEntries)
+            foreach (var entry in _filteredLogEntries)
             {
-                if (entry.Timestamp.Date == selectedDate)
-                {
-                    journalUserControl1.LogListBox.Items.Add($"{entry.Timestamp};{entry.RecognizedPerson}"); // Используем точку с запятой как разделитель
-                }
+                journalUserControl1.LogDataGrid.Rows.Add(entry.Timestamp.ToString("HH:mm:ss"), entry.RecognizedPerson);
             }
         }
 
         private FaceRecognitionSettings LoadSettings()
         {
-            if (File.Exists(@settingsFilePath))
+            if (System.IO.File.Exists(@settingsFilePath))
             {
-                var json = File.ReadAllText(@settingsFilePath);
+                var json = System.IO.File.ReadAllText(@settingsFilePath);
                 return JsonConvert.DeserializeObject<FaceRecognitionSettings>(json);
             }
             return new FaceRecognitionSettings(); // Default settings
@@ -556,14 +729,169 @@ namespace MultiFaceRec
         private void PlaySound()
         {
             var setting = LoadSettings();
-            if (setting.EnableNotifications == true) 
+            if (setting.EnableNotifications == true)
             {
-                string soundirPath = Path.Combine(Application.StartupPath, "assets/sounds");
+                string soundirPath = Path.Combine(Application.StartupPath, "sounds");
                 string filePath = Path.Combine(soundirPath, setting.Sound);
 
                 SoundPlayer sound = new SoundPlayer(@filePath);
                 sound.Play();
-            } 
+            }
         }
+        public async Task SendPhotoAsync(string filePath, string person)
+        {
+            var settings = LoadSettings();
+            string ChatId = settings.TelegramChatId;
+            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+
+                var fileToSend = new InputFileStream(stream, Path.GetFileName(filePath));
+                await Bot.SendPhotoAsync(ChatId, fileToSend);
+                await Bot.SendTextMessageAsync(ChatId, $"Похоже что..." + person + " отметился!");
+            }
+        }
+        public class TelegramService
+        {
+
+            // Замените на ваш токен
+            private static readonly string ChatId = "YOUR_CHAT_ID"; // Замените на ваш chat id
+
+            private static readonly string Token = "6834231088:AAFU5qWJfveGrt9DImqGU1DI9rp_JTGrgMo";
+
+        }
+
+        private void DeleteFaceButton_Click(object sender, EventArgs e)
+        {
+            if (comboBoxNames.SelectedItem != null)
+            {
+                DeleteSelectedFace();
+            }
+            else
+            {
+                MessageBox.Show("Пожалуйста, выберите лицо для удаления", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitializeTelegramBot()
+        {
+
+            Bot = new TelegramBotClient(Token);
+
+            var cts = new CancellationTokenSource();
+            ReceiverOptions receiverOptions = new ReceiverOptions
+            {
+                AllowedUpdates = { }, // receive all update types
+            };
+
+            Bot.StartReceiving(
+                HandleUpdateAsync,
+                HandleErrorAsync,
+                receiverOptions,
+                cancellationToken: cts.Token);
+
+            var me = Bot.GetMeAsync().Result;
+            Console.WriteLine($"Start listening for @{me.Username}");
+        }
+        private async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        {
+            if (update.Type != UpdateType.Message)
+                return;
+
+            var message = update.Message;
+
+            if (message.Type == MessageType.Text && message.Text.StartsWith("/"))
+            {
+                switch (message.Text.Split(' ')[0])
+                {
+                    case "/start":
+                        await botClient.SendTextMessageAsync(
+                            chatId: message.Chat.Id,
+                            text: "Привет! Отправь /chatid Для привязки чата к приложению.",
+                            cancellationToken: cancellationToken);
+                        break;
+
+                    case "/chatid":
+                        await botClient.SendTextMessageAsync(
+                            chatId: message.Chat.Id,
+                            text: $"Ваш id: {message.Chat.Id}.\n" +
+                            $"Для привязки зайдите в настроки программы и введите в поле 'Телеграм чат' ваш id",
+                            cancellationToken: cancellationToken);
+                        break;
+
+                    default:
+                        await botClient.SendTextMessageAsync(
+                            chatId: message.Chat.Id,
+                            text: "Unknown command. Try /start or /chatid.",
+                            cancellationToken: cancellationToken);
+                        break;
+                }
+            }
+        }
+        private Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+        {
+            string errorMessage;
+
+            if (exception is ApiRequestException apiRequestException)
+            {
+                errorMessage = $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}";
+            }
+            else
+            {
+                errorMessage = exception.ToString();
+            }
+
+            Console.WriteLine(errorMessage);
+            return Task.CompletedTask;
+        }
+
+
+
+        public void InitializeSounds(string appPath)
+        {
+            string SoundFilesPath = Path.Combine(appPath, "sounds");
+            // Получаем все файлы .wav из папки
+            string[] soundFiles = Directory.EnumerateFiles(SoundFilesPath, "*.wav").ToArray();
+
+            // Очищаем ComboBox
+            settingsUserControl2.comboboxSounds.Items.Clear();
+
+            // Добавляем каждый файл .wav в ComboBox
+            foreach (string sf in soundFiles)
+            {
+                // Используем только имя файла без расширения в ComboBox
+                settingsUserControl2.comboboxSounds.Items.Add(Path.GetFileName(sf));
+            }
+
+            // Если есть звуковые файлы, выбираем первый файл по умолчанию
+            if (settingsUserControl2.comboboxSounds.Items.Count > 0)
+            {
+                settingsUserControl2.comboboxSounds.SelectedIndex = 0;
+            }
+        }
+
+        public void addFaceButtonOn()
+        {
+            bunifuButton2.Visible = false;
+            saveGroupBox.Visible = true;
+            deleteGroupBox.Visible = true;
+        }
+        public void addFaceButtonOff()
+        {
+            bunifuButton2.Visible= true;
+            saveGroupBox.Visible = false;
+            deleteGroupBox.Visible = false;
+        }
+
     }
 }
+

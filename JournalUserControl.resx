@@ -131,4 +131,27 @@
         AABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="DataGridColumnDateTime.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="DataGridColumnName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="bunifuLabel1.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Segoe UI'; font-size: 12pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
+  <data name="FilterButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB0AAAAdCAYAAABWk2cPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAEmSURBVEhL7ZavjsJAEMYrkSdPIk+eRCKRPAISeYKE/hHF
+        IUlg95BIHgGJ5BGQSCTy3Awz3UkhdMKFspuQ0C/5pU3zzX6d3W660cspmeNXanCQWJw8QmphmP5CR4b5
+        X/kKW1Q0TQz8pRbxeWA9Mvgpw1dFXX2Taa8X1yexcKIZ6EvMRUWHBg5akQ945sZLbEucEz1cama/wEbi
+        XJf+1vA+ZbduLXWTb8q1jRfwoxlCwFuqCHV7Szf5pgkNShMalCY0KO8YajDmB9mNIQRlaGygpxnCAMMi
+        NJ/hh24IAP27i1AWvcFWNXmAptTd0xlM4pz4jBvsyGIA+MrLKHEX8XxXCjyRWZhJTFV8MqeOd1phPeCo
+        dqiJw7lz/sRrQdswW2BXhrtSFJ0BkbmMvo3ItWMAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="bunifuLabel2.BaseStylesheet" xml:space="preserve">
+    <value>#bunifu-label { padding: 0px; font-family: 'Segoe UI'; font-size: 12pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: rgb(0, 0, 0); text-align: left; }</value>
+  </data>
 </root>

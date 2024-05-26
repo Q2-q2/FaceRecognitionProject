@@ -84,6 +84,10 @@
     <Reference Include="System.CodeDom, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.CodeDom.8.0.0\lib\net462\System.CodeDom.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
@@ -118,14 +122,11 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telegram.Bot, Version=19.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Telegram.Bot.19.0.0\lib\netstandard2.0\Telegram.Bot.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddFaceUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AddFaceUserControl.Designer.cs">
-      <DependentUpon>AddFaceUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="EigenObjectRecognizer.cs" />
     <Compile Include="JournalUserControl.cs">
       <SubType>UserControl</SubType>
@@ -152,9 +153,6 @@
     <Compile Include="SettingsUserControl.Designer.cs">
       <DependentUpon>SettingsUserControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddFaceUserControl.resx">
-      <DependentUpon>AddFaceUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="JournalUserControl.resx">
       <DependentUpon>JournalUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +236,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\play-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\76-763994_universal-information-symbol-clip-arts-information-clipart-hd.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,6 @@
-﻿namespace MultiFaceRec
+﻿using MultiFaceRec;
+
+namespace MultiFaceRec
 {
     partial class FrmPrincipal
     {
@@ -29,10 +31,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges4 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
@@ -59,44 +62,54 @@
             this.imageBoxFrameGrabber = new Emgu.CV.UI.ImageBox();
             this.bunifuGroupBox2 = new Bunifu.UI.WinForms.BunifuGroupBox();
             this.cameraOnButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.bunifuGroupBox3 = new Bunifu.UI.WinForms.BunifuGroupBox();
+            this.saveGroupBox = new Bunifu.UI.WinForms.BunifuGroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.bunifuButton1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.bunifuButton2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.comboBoxNames = new System.Windows.Forms.ComboBox();
+            this.DeleteFaceButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.deleteGroupBox = new Bunifu.UI.WinForms.BunifuGroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.journalUserControl1 = new MultiFaceRec.JournalUserControl();
-            this.addFaceUserControl1 = new MultiFaceRec.AddFaceUserControl();
+            this.settingsUserControl2 = new MultiFaceRec.SettingsUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
             this.bunifuGradientPanel1.SuspendLayout();
             this.bunifuGroupBox1.SuspendLayout();
             this.sidebar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).BeginInit();
             this.bunifuGroupBox2.SuspendLayout();
-            this.bunifuGroupBox3.SuspendLayout();
+            this.saveGroupBox.SuspendLayout();
+            this.deleteGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(109, 200);
+            this.textBox1.Location = new System.Drawing.Point(126, 224);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(141, 30);
             this.textBox1.TabIndex = 7;
             this.textBox1.Text = "Sergio";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 203);
+            this.label1.Font = new System.Drawing.Font("Involve", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(42, 227);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 23);
             this.label1.TabIndex = 8;
             this.label1.Text = "Имя:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // imageBox1
             // 
             this.imageBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBox1.Location = new System.Drawing.Point(29, 13);
+            this.imageBox1.FunctionalMode = Emgu.CV.UI.ImageBox.FunctionalModeOption.Minimum;
+            this.imageBox1.Location = new System.Drawing.Point(41, 44);
             this.imageBox1.Margin = new System.Windows.Forms.Padding(4);
             this.imageBox1.Name = "imageBox1";
             this.imageBox1.Size = new System.Drawing.Size(217, 164);
@@ -321,6 +334,7 @@
             this.facerecBackgroundUserControl.AllowBorderColorChanges = false;
             this.facerecBackgroundUserControl.AllowMouseEffects = false;
             this.facerecBackgroundUserControl.AnimationSpeed = 200;
+            this.facerecBackgroundUserControl.AutoSize = true;
             this.facerecBackgroundUserControl.BackColor = System.Drawing.Color.Transparent;
             this.facerecBackgroundUserControl.BackgroundColor = System.Drawing.Color.White;
             this.facerecBackgroundUserControl.BorderColor = System.Drawing.Color.Transparent;
@@ -332,10 +346,10 @@
             this.facerecBackgroundUserControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.facerecBackgroundUserControl.Image = null;
             this.facerecBackgroundUserControl.ImageMargin = new System.Windows.Forms.Padding(0);
-            this.facerecBackgroundUserControl.Location = new System.Drawing.Point(251, 46);
+            this.facerecBackgroundUserControl.Location = new System.Drawing.Point(251, 40);
             this.facerecBackgroundUserControl.Name = "facerecBackgroundUserControl";
             this.facerecBackgroundUserControl.ShowBorders = true;
-            this.facerecBackgroundUserControl.Size = new System.Drawing.Size(1000, 650);
+            this.facerecBackgroundUserControl.Size = new System.Drawing.Size(1029, 680);
             this.facerecBackgroundUserControl.Style = Bunifu.UI.WinForms.BunifuUserControl.UserControlStyles.Flat;
             this.facerecBackgroundUserControl.TabIndex = 13;
             // 
@@ -355,7 +369,8 @@
             this.sidebar.Controls.Add(this.settingImageButton);
             this.sidebar.Controls.Add(this.faceRecLabel);
             this.sidebar.Controls.Add(this.faceRecImageButton);
-            this.sidebar.Location = new System.Drawing.Point(0, 39);
+            this.sidebar.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sidebar.Location = new System.Drawing.Point(0, 40);
             this.sidebar.MaximumSize = new System.Drawing.Size(245, 700);
             this.sidebar.MinimumSize = new System.Drawing.Size(70, 700);
             this.sidebar.Name = "sidebar";
@@ -581,10 +596,12 @@
             // imageBoxFrameGrabber
             // 
             this.imageBoxFrameGrabber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(332, 83);
+            this.imageBoxFrameGrabber.Location = new System.Drawing.Point(252, 64);
             this.imageBoxFrameGrabber.Margin = new System.Windows.Forms.Padding(4);
             this.imageBoxFrameGrabber.Name = "imageBoxFrameGrabber";
-            this.imageBoxFrameGrabber.Size = new System.Drawing.Size(360, 280);
+            this.imageBoxFrameGrabber.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.imageBoxFrameGrabber.Size = new System.Drawing.Size(700, 480);
+            this.imageBoxFrameGrabber.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imageBoxFrameGrabber.TabIndex = 4;
             this.imageBoxFrameGrabber.TabStop = false;
             // 
@@ -602,7 +619,7 @@
             this.bunifuGroupBox2.LabelAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.bunifuGroupBox2.LabelIndent = 10;
             this.bunifuGroupBox2.LineStyle = Bunifu.UI.WinForms.BunifuGroupBox.LineStyles.Solid;
-            this.bunifuGroupBox2.Location = new System.Drawing.Point(853, 97);
+            this.bunifuGroupBox2.Location = new System.Drawing.Point(965, 81);
             this.bunifuGroupBox2.Name = "bunifuGroupBox2";
             this.bunifuGroupBox2.Size = new System.Drawing.Size(291, 265);
             this.bunifuGroupBox2.TabIndex = 17;
@@ -627,11 +644,11 @@
             this.cameraOnButton.ColorContrastOnClick = 45;
             this.cameraOnButton.ColorContrastOnHover = 45;
             this.cameraOnButton.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges3.BottomLeft = true;
-            borderEdges3.BottomRight = true;
-            borderEdges3.TopLeft = true;
-            borderEdges3.TopRight = true;
-            this.cameraOnButton.CustomizableEdges = borderEdges3;
+            borderEdges4.BottomLeft = true;
+            borderEdges4.BottomRight = true;
+            borderEdges4.TopLeft = true;
+            borderEdges4.TopRight = true;
+            this.cameraOnButton.CustomizableEdges = borderEdges4;
             this.cameraOnButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.cameraOnButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.cameraOnButton.DisabledFillColor = System.Drawing.Color.Empty;
@@ -700,24 +717,36 @@
             this.cameraOnButton.UseDefaultRadiusAndThickness = true;
             this.cameraOnButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // bunifuGroupBox3
+            // saveGroupBox
             // 
-            this.bunifuGroupBox3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(255)))));
-            this.bunifuGroupBox3.BorderRadius = 10;
-            this.bunifuGroupBox3.BorderThickness = 5;
-            this.bunifuGroupBox3.Controls.Add(this.bunifuButton1);
-            this.bunifuGroupBox3.Controls.Add(this.label1);
-            this.bunifuGroupBox3.Controls.Add(this.textBox1);
-            this.bunifuGroupBox3.Controls.Add(this.imageBox1);
-            this.bunifuGroupBox3.Font = new System.Drawing.Font("Involve", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bunifuGroupBox3.LabelAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.bunifuGroupBox3.LabelIndent = 10;
-            this.bunifuGroupBox3.LineStyle = Bunifu.UI.WinForms.BunifuGroupBox.LineStyles.Solid;
-            this.bunifuGroupBox3.Location = new System.Drawing.Point(853, 394);
-            this.bunifuGroupBox3.Name = "bunifuGroupBox3";
-            this.bunifuGroupBox3.Size = new System.Drawing.Size(291, 302);
-            this.bunifuGroupBox3.TabIndex = 19;
-            this.bunifuGroupBox3.TabStop = false;
+            this.saveGroupBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(255)))));
+            this.saveGroupBox.BorderRadius = 5;
+            this.saveGroupBox.BorderThickness = 3;
+            this.saveGroupBox.Controls.Add(this.label6);
+            this.saveGroupBox.Controls.Add(this.bunifuButton1);
+            this.saveGroupBox.Controls.Add(this.label1);
+            this.saveGroupBox.Controls.Add(this.textBox1);
+            this.saveGroupBox.Controls.Add(this.imageBox1);
+            this.saveGroupBox.Font = new System.Drawing.Font("Involve", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.saveGroupBox.LabelAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.saveGroupBox.LabelIndent = 10;
+            this.saveGroupBox.LineStyle = Bunifu.UI.WinForms.BunifuGroupBox.LineStyles.Solid;
+            this.saveGroupBox.Location = new System.Drawing.Point(965, 64);
+            this.saveGroupBox.Name = "saveGroupBox";
+            this.saveGroupBox.Size = new System.Drawing.Size(300, 325);
+            this.saveGroupBox.TabIndex = 19;
+            this.saveGroupBox.TabStop = false;
+            this.saveGroupBox.Visible = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(70, 17);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(154, 23);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Добавление лиц";
             // 
             // bunifuButton1
             // 
@@ -738,15 +767,16 @@
             this.bunifuButton1.ColorContrastOnClick = 45;
             this.bunifuButton1.ColorContrastOnHover = 45;
             this.bunifuButton1.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges2.BottomLeft = true;
-            borderEdges2.BottomRight = true;
-            borderEdges2.TopLeft = true;
-            borderEdges2.TopRight = true;
-            this.bunifuButton1.CustomizableEdges = borderEdges2;
+            borderEdges1.BottomLeft = true;
+            borderEdges1.BottomRight = true;
+            borderEdges1.TopLeft = true;
+            borderEdges1.TopRight = true;
+            this.bunifuButton1.CustomizableEdges = borderEdges1;
             this.bunifuButton1.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton1.DisabledFillColor = System.Drawing.Color.Empty;
             this.bunifuButton1.DisabledForecolor = System.Drawing.Color.Empty;
+            this.bunifuButton1.Enabled = false;
             this.bunifuButton1.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
             this.bunifuButton1.Font = new System.Drawing.Font("Involve", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bunifuButton1.ForeColor = System.Drawing.Color.White;
@@ -768,7 +798,7 @@
             this.bunifuButton1.IdleIconLeftImage = null;
             this.bunifuButton1.IdleIconRightImage = null;
             this.bunifuButton1.IndicateFocus = false;
-            this.bunifuButton1.Location = new System.Drawing.Point(20, 241);
+            this.bunifuButton1.Location = new System.Drawing.Point(28, 261);
             this.bunifuButton1.Name = "bunifuButton1";
             this.bunifuButton1.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton1.OnDisabledState.BorderRadius = 1;
@@ -820,25 +850,26 @@
             this.bunifuButton2.AutoGenerateColors = false;
             this.bunifuButton2.AutoRoundBorders = false;
             this.bunifuButton2.AutoSizeLeftIcon = true;
-            this.bunifuButton2.AutoSizeRightIcon = true;
+            this.bunifuButton2.AutoSizeRightIcon = false;
             this.bunifuButton2.BackColor = System.Drawing.Color.Transparent;
             this.bunifuButton2.BackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(122)))), ((int)(((byte)(183)))));
             this.bunifuButton2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuButton2.BackgroundImage")));
             this.bunifuButton2.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
-            this.bunifuButton2.ButtonText = "Отметиться";
+            this.bunifuButton2.ButtonText = "Отметится";
             this.bunifuButton2.ButtonTextMarginLeft = 0;
             this.bunifuButton2.ColorContrastOnClick = 45;
             this.bunifuButton2.ColorContrastOnHover = 45;
             this.bunifuButton2.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges1.BottomLeft = true;
-            borderEdges1.BottomRight = true;
-            borderEdges1.TopLeft = true;
-            borderEdges1.TopRight = true;
-            this.bunifuButton2.CustomizableEdges = borderEdges1;
+            borderEdges3.BottomLeft = true;
+            borderEdges3.BottomRight = true;
+            borderEdges3.TopLeft = true;
+            borderEdges3.TopRight = true;
+            this.bunifuButton2.CustomizableEdges = borderEdges3;
             this.bunifuButton2.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton2.DisabledFillColor = System.Drawing.Color.Empty;
             this.bunifuButton2.DisabledForecolor = System.Drawing.Color.Empty;
+            this.bunifuButton2.Enabled = false;
             this.bunifuButton2.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
             this.bunifuButton2.Font = new System.Drawing.Font("Involve", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bunifuButton2.ForeColor = System.Drawing.Color.White;
@@ -860,7 +891,7 @@
             this.bunifuButton2.IdleIconLeftImage = null;
             this.bunifuButton2.IdleIconRightImage = null;
             this.bunifuButton2.IndicateFocus = false;
-            this.bunifuButton2.Location = new System.Drawing.Point(393, 407);
+            this.bunifuButton2.Location = new System.Drawing.Point(1019, 450);
             this.bunifuButton2.Name = "bunifuButton2";
             this.bunifuButton2.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton2.OnDisabledState.BorderRadius = 1;
@@ -894,7 +925,7 @@
             this.bunifuButton2.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.bunifuButton2.OnPressedState.IconLeftImage = null;
             this.bunifuButton2.OnPressedState.IconRightImage = null;
-            this.bunifuButton2.Size = new System.Drawing.Size(248, 39);
+            this.bunifuButton2.Size = new System.Drawing.Size(175, 47);
             this.bunifuButton2.TabIndex = 20;
             this.bunifuButton2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuButton2.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -903,20 +934,150 @@
             this.bunifuButton2.UseDefaultRadiusAndThickness = true;
             this.bunifuButton2.Click += new System.EventHandler(this.bunifuButton21_Click);
             // 
+            // comboBoxNames
+            // 
+            this.comboBoxNames.FormattingEnabled = true;
+            this.comboBoxNames.Location = new System.Drawing.Point(19, 59);
+            this.comboBoxNames.Name = "comboBoxNames";
+            this.comboBoxNames.Size = new System.Drawing.Size(242, 31);
+            this.comboBoxNames.TabIndex = 24;
+            // 
+            // DeleteFaceButton
+            // 
+            this.DeleteFaceButton.AllowAnimations = true;
+            this.DeleteFaceButton.AllowMouseEffects = true;
+            this.DeleteFaceButton.AllowToggling = false;
+            this.DeleteFaceButton.AnimationSpeed = 200;
+            this.DeleteFaceButton.AutoGenerateColors = false;
+            this.DeleteFaceButton.AutoRoundBorders = false;
+            this.DeleteFaceButton.AutoSizeLeftIcon = true;
+            this.DeleteFaceButton.AutoSizeRightIcon = true;
+            this.DeleteFaceButton.BackColor = System.Drawing.Color.Transparent;
+            this.DeleteFaceButton.BackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(122)))), ((int)(((byte)(183)))));
+            this.DeleteFaceButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("DeleteFaceButton.BackgroundImage")));
+            this.DeleteFaceButton.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.DeleteFaceButton.ButtonText = "Удалить";
+            this.DeleteFaceButton.ButtonTextMarginLeft = 0;
+            this.DeleteFaceButton.ColorContrastOnClick = 45;
+            this.DeleteFaceButton.ColorContrastOnHover = 45;
+            this.DeleteFaceButton.Cursor = System.Windows.Forms.Cursors.Default;
+            borderEdges2.BottomLeft = true;
+            borderEdges2.BottomRight = true;
+            borderEdges2.TopLeft = true;
+            borderEdges2.TopRight = true;
+            this.DeleteFaceButton.CustomizableEdges = borderEdges2;
+            this.DeleteFaceButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.DeleteFaceButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.DeleteFaceButton.DisabledFillColor = System.Drawing.Color.Empty;
+            this.DeleteFaceButton.DisabledForecolor = System.Drawing.Color.Empty;
+            this.DeleteFaceButton.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
+            this.DeleteFaceButton.Font = new System.Drawing.Font("Involve", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DeleteFaceButton.ForeColor = System.Drawing.Color.White;
+            this.DeleteFaceButton.IconLeft = null;
+            this.DeleteFaceButton.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DeleteFaceButton.IconLeftCursor = System.Windows.Forms.Cursors.Default;
+            this.DeleteFaceButton.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
+            this.DeleteFaceButton.IconMarginLeft = 11;
+            this.DeleteFaceButton.IconPadding = 10;
+            this.DeleteFaceButton.IconRight = null;
+            this.DeleteFaceButton.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DeleteFaceButton.IconRightCursor = System.Windows.Forms.Cursors.Default;
+            this.DeleteFaceButton.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
+            this.DeleteFaceButton.IconSize = 25;
+            this.DeleteFaceButton.IdleBorderColor = System.Drawing.Color.Empty;
+            this.DeleteFaceButton.IdleBorderRadius = 0;
+            this.DeleteFaceButton.IdleBorderThickness = 0;
+            this.DeleteFaceButton.IdleFillColor = System.Drawing.Color.Empty;
+            this.DeleteFaceButton.IdleIconLeftImage = null;
+            this.DeleteFaceButton.IdleIconRightImage = null;
+            this.DeleteFaceButton.IndicateFocus = false;
+            this.DeleteFaceButton.Location = new System.Drawing.Point(19, 112);
+            this.DeleteFaceButton.Name = "DeleteFaceButton";
+            this.DeleteFaceButton.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.DeleteFaceButton.OnDisabledState.BorderRadius = 1;
+            this.DeleteFaceButton.OnDisabledState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.DeleteFaceButton.OnDisabledState.BorderThickness = 1;
+            this.DeleteFaceButton.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.DeleteFaceButton.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.DeleteFaceButton.OnDisabledState.IconLeftImage = null;
+            this.DeleteFaceButton.OnDisabledState.IconRightImage = null;
+            this.DeleteFaceButton.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(164)))), ((int)(((byte)(214)))));
+            this.DeleteFaceButton.onHoverState.BorderRadius = 1;
+            this.DeleteFaceButton.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.DeleteFaceButton.onHoverState.BorderThickness = 1;
+            this.DeleteFaceButton.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(164)))), ((int)(((byte)(214)))));
+            this.DeleteFaceButton.onHoverState.ForeColor = System.Drawing.Color.White;
+            this.DeleteFaceButton.onHoverState.IconLeftImage = null;
+            this.DeleteFaceButton.onHoverState.IconRightImage = null;
+            this.DeleteFaceButton.OnIdleState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(161)))), ((int)(((byte)(212)))));
+            this.DeleteFaceButton.OnIdleState.BorderRadius = 1;
+            this.DeleteFaceButton.OnIdleState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.DeleteFaceButton.OnIdleState.BorderThickness = 1;
+            this.DeleteFaceButton.OnIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(255)))));
+            this.DeleteFaceButton.OnIdleState.ForeColor = System.Drawing.Color.White;
+            this.DeleteFaceButton.OnIdleState.IconLeftImage = null;
+            this.DeleteFaceButton.OnIdleState.IconRightImage = null;
+            this.DeleteFaceButton.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(196)))));
+            this.DeleteFaceButton.OnPressedState.BorderRadius = 1;
+            this.DeleteFaceButton.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.DeleteFaceButton.OnPressedState.BorderThickness = 1;
+            this.DeleteFaceButton.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(196)))));
+            this.DeleteFaceButton.OnPressedState.ForeColor = System.Drawing.Color.White;
+            this.DeleteFaceButton.OnPressedState.IconLeftImage = null;
+            this.DeleteFaceButton.OnPressedState.IconRightImage = null;
+            this.DeleteFaceButton.Size = new System.Drawing.Size(248, 39);
+            this.DeleteFaceButton.TabIndex = 25;
+            this.DeleteFaceButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DeleteFaceButton.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.DeleteFaceButton.TextMarginLeft = 0;
+            this.DeleteFaceButton.TextPadding = new System.Windows.Forms.Padding(0);
+            this.DeleteFaceButton.UseDefaultRadiusAndThickness = true;
+            this.DeleteFaceButton.Click += new System.EventHandler(this.DeleteFaceButton_Click);
+            // 
+            // deleteGroupBox
+            // 
+            this.deleteGroupBox.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(196)))), ((int)(((byte)(255)))));
+            this.deleteGroupBox.BorderRadius = 5;
+            this.deleteGroupBox.BorderThickness = 3;
+            this.deleteGroupBox.Controls.Add(this.label7);
+            this.deleteGroupBox.Controls.Add(this.comboBoxNames);
+            this.deleteGroupBox.Controls.Add(this.DeleteFaceButton);
+            this.deleteGroupBox.Font = new System.Drawing.Font("Involve", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.deleteGroupBox.LabelAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.deleteGroupBox.LabelIndent = 10;
+            this.deleteGroupBox.LineStyle = Bunifu.UI.WinForms.BunifuGroupBox.LineStyles.Solid;
+            this.deleteGroupBox.Location = new System.Drawing.Point(965, 438);
+            this.deleteGroupBox.Name = "deleteGroupBox";
+            this.deleteGroupBox.Size = new System.Drawing.Size(300, 177);
+            this.deleteGroupBox.TabIndex = 21;
+            this.deleteGroupBox.TabStop = false;
+            this.deleteGroupBox.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(72, 14);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(129, 23);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Удаление лиц";
+            // 
             // journalUserControl1
             // 
             this.journalUserControl1.BackColor = System.Drawing.Color.White;
             this.journalUserControl1.Location = new System.Drawing.Point(251, 46);
             this.journalUserControl1.Name = "journalUserControl1";
-            this.journalUserControl1.Size = new System.Drawing.Size(1000, 650);
+            this.journalUserControl1.Size = new System.Drawing.Size(1017, 650);
             this.journalUserControl1.TabIndex = 16;
             // 
-            // addFaceUserControl1
+            // settingsUserControl2
             // 
-            this.addFaceUserControl1.Location = new System.Drawing.Point(268, 46);
-            this.addFaceUserControl1.Name = "addFaceUserControl1";
-            this.addFaceUserControl1.Size = new System.Drawing.Size(1000, 650);
-            this.addFaceUserControl1.TabIndex = 21;
+            this.settingsUserControl2.BackColor = System.Drawing.Color.White;
+            this.settingsUserControl2.Location = new System.Drawing.Point(251, 46);
+            this.settingsUserControl2.Name = "settingsUserControl2";
+            this.settingsUserControl2.Size = new System.Drawing.Size(1017, 650);
+            this.settingsUserControl2.TabIndex = 22;
             // 
             // FrmPrincipal
             // 
@@ -927,17 +1088,19 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.saveGroupBox);
+            this.Controls.Add(this.deleteGroupBox);
             this.Controls.Add(this.bunifuButton2);
-            this.Controls.Add(this.bunifuGroupBox3);
             this.Controls.Add(this.bunifuGroupBox2);
-            this.Controls.Add(this.bunifuGradientPanel1);
-            this.Controls.Add(this.sidebar);
             this.Controls.Add(this.imageBoxFrameGrabber);
             this.Controls.Add(this.facerecBackgroundUserControl);
             this.Controls.Add(this.journalUserControl1);
-            this.Controls.Add(this.addFaceUserControl1);
+            this.Controls.Add(this.settingsUserControl2);
+            this.Controls.Add(this.sidebar);
+            this.Controls.Add(this.bunifuGradientPanel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -953,9 +1116,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFrameGrabber)).EndInit();
             this.bunifuGroupBox2.ResumeLayout(false);
             this.bunifuGroupBox2.PerformLayout();
-            this.bunifuGroupBox3.ResumeLayout(false);
-            this.bunifuGroupBox3.PerformLayout();
+            this.saveGroupBox.ResumeLayout(false);
+            this.saveGroupBox.PerformLayout();
+            this.deleteGroupBox.ResumeLayout(false);
+            this.deleteGroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -985,13 +1151,18 @@
         private JournalUserControl journalUserControl1;
         private Bunifu.UI.WinForms.BunifuGroupBox bunifuGroupBox2;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton cameraOnButton;
-        private Bunifu.UI.WinForms.BunifuGroupBox bunifuGroupBox3;
+        private Bunifu.UI.WinForms.BunifuGroupBox saveGroupBox;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton2;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton1;
         private Bunifu.UI.WinForms.BunifuLabel addFaceLabel;
         private Bunifu.UI.WinForms.BunifuImageButton addFaceImageButton;
-        private AddFaceUserControl addFaceUserControl1;
         private SettingsUserControl settingsUserControl1;
+        private SettingsUserControl settingsUserControl2;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton DeleteFaceButton;
+        private System.Windows.Forms.ComboBox comboBoxNames;
+        private System.Windows.Forms.Label label6;
+        private Bunifu.UI.WinForms.BunifuGroupBox deleteGroupBox;
+        private System.Windows.Forms.Label label7;
     }
 }
 

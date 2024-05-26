@@ -121,14 +121,17 @@
   <data name="plusicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plusicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="journal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\journal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png-transparent-menu-feather-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png-transparent-menu-feather-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png-transparent-facial-recognition-system-computer-icons-reconnaissance-text-emoticon-black-and-white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png-transparent-facial-recognition-system-computer-icons-reconnaissance-text-emoticon-black-and-white1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png-transparent-menu-feather-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png-transparent-menu-feather-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="journal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\journal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Plusico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Plusico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -136,10 +139,13 @@
   <data name="windows-settings-app-icon-292036" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\windows-settings-app-icon-2920361.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="play-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\play-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="journal1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\journal1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="play-button" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\play-button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="76-763994_universal-information-symbol-clip-arts-information-clipart-hd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\76-763994_universal-information-symbol-clip-arts-information-clipart-hd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

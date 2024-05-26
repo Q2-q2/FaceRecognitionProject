@@ -63,6 +63,16 @@ namespace MultiFaceRec.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _76_763994_universal_information_symbol_clip_arts_information_clipart_hd {
+            get {
+                object obj = ResourceManager.GetObject("76-763994_universal-information-symbol-clip-arts-information-clipart-hd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap journal {
             get {
                 object obj = ResourceManager.GetObject("journal", resourceCulture);
@@ -86,6 +96,16 @@ namespace MultiFaceRec.Properties {
         internal static System.Drawing.Bitmap play_button {
             get {
                 object obj = ResourceManager.GetObject("play-button", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Plus {
+            get {
+                object obj = ResourceManager.GetObject("Plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
